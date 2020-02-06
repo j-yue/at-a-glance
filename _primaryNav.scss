@@ -1,0 +1,47 @@
+@import './variables';
+@import './mixins';
+
+
+.inactive-nav {
+    display: none;
+    
+}
+
+
+.primary-nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: $header-height;
+    font-family: $calendar-font;
+}
+
+.links {
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    height: inherit;
+    background: $primary-nav-color;
+    @include flex(row, wrap, space-around, center);
+    list-style: none;
+}
+
+.links > li {
+    transition: $transition-hover;
+    line-height: 2;
+    padding: .5rem 1rem;
+    height: 100%;
+    @include flex(row, wrap, center, center);
+}
+
+.primary-close {
+    margin: 0;
+    // max-width: 10%;
+    @include close-button();
+}
+
+.link:hover, .primary-close:hover {
+    @include nav-hover();
+}
+

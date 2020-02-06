@@ -1,0 +1,103 @@
+@import './variables';
+@import './mixins';
+
+.location {
+    @include popup_layout($location-color);
+}
+
+.map {
+    width: 90%;
+    
+    height: 50%;
+    margin: auto;
+    flex-grow: .75;
+}
+
+.location-content {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-items: space-between;
+    padding: $action-padding;
+}
+
+.location-details {
+    margin: auto;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    grid-template-areas: 
+        "city btn"
+        "cc btn";
+    align-items: center;
+}
+
+.city {
+    grid-area: city;
+}
+
+.cc {
+    grid-area: cc;
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+.location-btn {
+    grid-area: btn;
+    font-size: inherit;
+    border: none;
+    line-height: 2;
+    background: #000;
+    color: inherit;
+    cursor: pointer;
+    transition: .5s;
+    align-self: baseline;
+    height: 100%;
+    font: inherit;
+}
+
+.location-btn:hover {
+    transform: scale(1.1);
+}
+
+.location-btn:active {
+    transform: scale(1);
+}
+
+.credits {
+    @include popup_layout($credits-color);
+    font-family: $finance-font;
+    // padding: 0 5%;
+}
+
+.credits-content {
+    @include content-layout();
+    padding: $action-padding;
+}
+
+.credits-list {
+    list-style: square inside;
+    padding: 0;
+    text-align: left;
+    flex-grow: 1;
+    margin: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    text-align: justify;
+}
+
+
+.credits-list li a {
+    color: inherit;
+    font-weight: bold;
+}
+
+.about {
+    @include popup_layout($about-color);
+    // text-align: justify;
+}
+
+.about-content {
+    padding: $action-padding;
+    text-align: justify;
+}

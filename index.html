@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="jyue.github.io">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="main.css">
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    <link rel="icon" type="image/png" href="assets/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
+    <script type="module" src="./generatePage.js"></script>
+    <script src="./skycons.js"></script>
+    <title>At-A-Glance</title>
+
+  </head>
+  <body>
+
+    <nav class="primary-nav inactive-nav">
+      <ul class="links">
+        <li class="link">Location</li>
+        <li class="link">About</li>
+        <li class="link">Credits</li>
+        <li class="primary-close">X</li>
+      </ul>
+    </nav>
+
+    <main>
+
+      <article class="widgets">
+
+        <header class="main-header">
+          <img class="refresh" src="assets/refresh.svg">
+          <h1 class="title">At-A-Glance</h1>
+          <img class="menu" src="assets/menu.svg">
+        </header>
+
+        <section class="weather-widget">
+
+          <canvas class="weather-icon-widget">animated weather icon</canvas>
+          <div class="temp">temperature</div>
+          <div class="type">weather type</div>
+        </section>
+
+        <section class="calendar-widget">
+          <div class="day">day of week</div>
+          <div class="date">date</div>
+          <div class="month">month</div>
+        </section>
+
+        <section class="finance-widget">
+          <div class="name">index name</div>
+          <div class="price">index price</div>
+          <div class="changes">index change</div>
+        </section>
+
+        <section class="news-widget">
+          <div class="headline">news headline</div>
+        </section>
+
+      </article>
+
+      <div class="popup">
+
+
+        <article class="weather-popup">
+
+          <section class="weather">
+            <canvas class="weather-icon-popup"></canvas>
+
+            <section class="temp">
+              <div class="low">lowTemp</div>
+              <div class="temp">currTemp</div>
+              <div class="high">hightTemp</div>
+              <div class="type">cloudy</div>
+              <div class="description">cloudy skies</div>
+            </section>
+          </section>
+        </article>
+
+          <article class="calendar-popup">
+
+          <section class="calendar">
+
+          </section>
+        </article>
+
+
+        <article class="finance-popup">
+
+          <section class="finance">
+            <ul class="finance-nav">
+              <li class="indexes"><a>Indexes</a></li>
+              <li class="crypto"><a>Cryptocurrencies</a></li>
+            </ul>
+
+            <div class="tab">
+              <section class="indexes-info"></section>
+              <section class="crypto-info"></section>
+            </div>
+          </section>
+
+        </article>
+
+        <article class="news-popup">
+
+          <section class="news">
+            <ul class="news-nav">
+              <li class="national"><a>National</a></li>
+              <li class="world"><a>World</a></li>
+              <li class="business"><a>Business</a></li>
+            </ul>
+
+            <div class="tab">
+                <ul class="national-headlines">
+                  <li>national headline</li>
+                </ul>
+                
+
+                <ul class="world-headlines">
+                  <li>world headline</li>
+                </ul>
+                
+
+                <ul class="business-headlines">
+                  <li>business headline</li>
+                </ul>
+
+            </div>
+          </section>
+
+        </article>
+
+        <!-- actions -->
+
+        <article class="location">
+            <header class="header">
+              <h4 class="title">Location</h4>
+              <button class="close">X</button>
+            </header>
+
+            <section class="location-content">
+              <div class="location-details">
+                <div class="city">City</div>
+                <div class="cc">Country</div>
+                <button class="location-btn">Use Current Location</button>
+              </div>
+              
+              <div id="map" class="map"></div>
+            </section>
+            
+        </article>
+
+
+        <article class="credits">
+            <header class="header">
+                <h4 class="title">Credits</h4>
+                <button class="close">X</button>
+              </header>
+
+          <section class="credits-content">
+
+            <p>Designed and coded by |insert github link here|. Made possible with:</p>
+            <ul class="credits-list">
+              <li>weather data from <a target="_blank" href="https://openweathermap.org/api">Open Weather Map</a></li>
+              <li>news data gathered from <a target="_blank" href="https://newsapi.org/">News API</a> and <a target="_blank" href="https://developer.nytimes.com/">The New York Times</a></li>
+              <li>weather icons from <a target="_blank" href="https://darkskyapp.github.io/skycons/">Skycons</a></li>
+              <li>reverse geocoding from <a target="_blank" href="https://opencagedata.com/api">OpenCage Geocoder</a></li>
+              <li>map from <a target="_blank" href="https://openlayers.org/">OpenLayers</a></li>
+              <li>financial data from <a target="_blank" href="https://financialmodelingprep.com/developer/docs">Financial Modeling Prep</a></li>
+            </ul>
+
+          </section>
+
+        </article>
+
+
+        <article class="about">
+            <header class="header">
+                <h4 class="title">About</h4>
+                <button class="close">X</button>
+              </header>
+
+          <section class="about-content">
+
+            <p>
+              At-A-Glance is a single page web app that that simplifies the 
+              process of getting updated on information that is periodically 
+              checked throughout the day. Rather than individually checking 
+              separate apps or sites for weather, dates, news, and finance, 
+              this web app summarizes it all in one screen. For more detailed 
+              information, simply tap the desired widget.
+            </p>
+
+            <p>
+              This web app will be periodically updated with new features 
+              and widgets. Planned features include: a todo list widget, 
+              customizable themes, guided tour for new users, 
+              widget rearrangement via drag and drop, and hourly 
+              forecasts for the weather widget.
+            </p>
+
+          </section>
+        </article>
+
+
+
+
+    </main>
+
+  </body>
+</html>

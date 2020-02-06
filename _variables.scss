@@ -1,0 +1,37 @@
+//FONTS
+$font: 'Open Sans', sans-serif;
+$calendar-font: 'Verdana', sans-serif;
+$finance-font: 'Consolas', 'Segoe UI', sans-serif;
+$news-font: 'Tahoma', 'Verdana', sans-serif;
+
+//SIZES
+$primary-size: 2.5rem;
+$emphasis-size: 4rem;
+$border-radius: 10px;
+$padding: 10px;
+$screen-padding: .5rem;
+$title-size: 3rem;
+$month-size: 2.5rem;
+$action-padding: 5%;
+$header-height: 10vh;
+
+//COLORS
+$primary-nav-color: #000;
+$primary-color: #FFF;
+$header-color: #000;
+$weather-color: #2d98da;
+$calendar-color: #20bf6b;
+$finance-color: #eb3b5a;
+$news-color: #4b6584;
+$location-color: #bdc3c7;
+$about-color: #2d3436;
+$credits-color:#1abc9c;
+
+//INTERACTIONS
+$transition-click: .3s;
+$transition-hover: .5s;
+$transform-button: scale(1.2);
+
+//MEDIA QUERIES
+$min-height: 400px;
+$min-width: 320px;

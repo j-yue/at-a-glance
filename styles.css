@@ -1,0 +1,370 @@
+html {
+  font: 16px "Open Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #FFF;
+}
+
+header[class$="-header"] {
+  font-size: 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+      grid-template: 1fr / 1fr 5fr 1fr;
+      grid-template-areas: ". title btn";
+}
+
+header[class$="-header__title"] {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: title;
+  text-align: baseline;
+}
+
+button[class$="-header__close"] {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: btn;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #FFF;
+  padding: 0;
+}
+
+.nav--primary {
+  display: none;
+}
+
+.widgets {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 5fr 5fr;
+  -ms-grid-columns: (1fr)[2];
+      grid-template: 1fr 5fr 5fr/repeat(2, 1fr);
+      grid-template-areas: "header header" "weather calendar" "finance news";
+  width: 100%;
+  height: 100vh;
+}
+
+.main-header {
+  color: #000;
+  font-size: 2rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+      grid-template: 1fr / 1fr 5fr 1fr;
+      grid-template-areas: ". title btn";
+}
+
+.main-header__title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: title;
+  text-align: center;
+}
+
+.weather-widget {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: weather;
+  background: #2d98da;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.weather-widget__icon {
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5 1 50%;
+          flex: 0.5 1 50%;
+}
+
+.weather-widget__temp {
+  font-size: 2rem;
+  font-weight: bold;
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5 1 20%;
+          flex: 0.5 1 20%;
+}
+
+.weather-widget__type {
+  font-size: 1.35rem;
+  -webkit-box-flex: 0.5;
+      -ms-flex: 0.5 1 20%;
+          flex: 0.5 1 20%;
+}
+
+.calendar-widget {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: calendar;
+  background: #20bf6b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.calendar-widget__date {
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.calendar-widget__day {
+  font-size: 1.35rem;
+}
+
+.calendar-widget__month {
+  font-size: 1.35rem;
+}
+
+.finance-widget {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: finance;
+  background: #eb3b5a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: 'Segoe UI', 'Helvetica', 'Open Sans', sans-serif;
+}
+
+.finance-widget__price {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.finance-widget__name {
+  font-size: 1.35rem;
+}
+
+.finance-widget__changes {
+  font-size: 1.35rem;
+}
+
+.news-widget {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: news;
+  background: #4b6584;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.news-widget__headline {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Tahoma', 'Verdana', 'Geneva' sans-serif;
+}
+
+.weather-popup {
+  height: 100vh;
+  background: #2d98da;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 10fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 10fr / 1fr;
+      grid-template-areas: "header" "content";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.weather {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: content;
+}
+
+.calendar-popup {
+  background: #20bf6b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  min-height: 90vh;
+}
+
+.month {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.week {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.day {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (minmax(20% 20%))[5];
+  -ms-grid-columns: (minmax(14% 14%))[7];
+      grid-template: repeat(5, minmax(20% 20%))/repeat(7, minmax(14% 14%));
+  font-weight: 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cell__date {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.finance-popup {
+  height: 100vh;
+  background: #eb3b5a;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 10fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 10fr / 1fr;
+      grid-template-areas: "header" "content";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.news-popup {
+  height: 100vh;
+  background: #4b6584;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 10fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 10fr / 1fr;
+      grid-template-areas: "header" "content";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.location {
+  height: 100vh;
+  background: #3867d6;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 10fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 10fr / 1fr;
+      grid-template-areas: "header" "content";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-template: 1fr 10fr / 1fr;
+}
+
+.credits {
+  height: 100vh;
+  background: #fd9644;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 10fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 10fr / 1fr;
+      grid-template-areas: "header" "content";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-template: 1fr 10fr / 1fr;
+}
+
+.about {
+  height: 100vh;
+  background: #2bcbba;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 10fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 10fr / 1fr;
+      grid-template-areas: "header" "content";
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  grid-template: 1fr 10fr / 1fr;
+}
+/*# sourceMappingURL=styles.css.map */

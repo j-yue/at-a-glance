@@ -1,0 +1,57 @@
+@import './variables';
+@import './mixins';
+
+.widgets {
+    display: grid;
+    grid-template: 1fr 4.5fr 4.5fr / repeat(2, 1fr);
+    grid-template-areas: 
+    "header header"
+    "weather calendar"
+    "finance news";
+    // height: 100vh;
+    min-width: $min-width;
+    min-height: $min-height;
+}
+
+.widgets > section:hover {
+    background: #888;
+}
+
+
+.widgets > section:hover {
+    background: #888;
+}
+
+
+.weather-widget {
+    @include widget-layout($weather-color);
+}
+
+.weather-icon-widget {
+    max-width: 100%;
+}
+
+.weather-widget .current {
+    @include emphasis($font, 4rem);
+}
+
+.calendar-widget {
+    @include widget-layout($calendar-color);
+}
+
+.calendar-widget .date {
+    @include emphasis($calendar-font, 5rem);
+}
+
+.finance-widget {
+    @include widget-layout($finance-color);
+}
+
+.finance-widget .price {
+    @include emphasis($finance-font, 3rem);
+}
+
+.news-widget {
+    @include widget-layout($news-color);
+    @include emphasis($news-font, 2.25rem);
+}

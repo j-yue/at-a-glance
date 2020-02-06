@@ -1,0 +1,101 @@
+@import './variables';
+@import './mixins';
+@import './widgets';
+@import './popups';
+@import './actions';
+@import './primaryNav';
+@import './mediaQueries';
+
+
+html {
+   font-size: 10px;
+//    width: 100%;
+//    height: 100%;
+//    min-width: $min-width;
+//    min-height: $min-height;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-size: $primary-size;
+    color: $primary-color;
+    text-align: center;
+    // background: #888;
+    cursor: default;
+    position: relative;
+    min-width: $min-width;
+    min-height: $min-height;
+    // overflow: hidden;
+    font-family: $font;
+}
+
+
+.main-header {
+    grid-area: header;
+    color: $header-color;
+    background: $primary-color;
+    height: $header-height;
+    // flex-grow: 1;
+    // margin: 0 2rem;
+    @include flex(row, wrap, space-around, center);
+}
+
+.main-header .title {
+    margin: 0;
+    font-size: $title-size;
+}
+
+.refresh, .menu {
+    @include icon();
+}
+
+.refresh:hover, .menu:hover {
+    @include icon-hover();
+}
+
+.refresh:active, .menu:active {
+    @include icon-active();
+}
+
+.header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: ". title close";
+    align-items: center;
+    font-size: 2.5rem;
+}
+
+.title {
+    grid-area: title;
+    margin: 0;
+    font-size: $title-size;
+}
+
+.close {
+    grid-area: close;
+    width: 50%;
+    margin: auto;
+    background: none;
+    border: none;
+    @include close-button();
+}
+
+.close:hover {
+    @include close-button-hover();
+    line-height: 2;
+    width: 25%;
+}
+
+.close:active {
+    transform: $transform-button();
+}
+
+

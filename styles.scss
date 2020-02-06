@@ -1,0 +1,328 @@
+$close-btn: #FFF;
+$font: 'Open Sans', sans-serif;
+$weather-color: #2d98da;
+$calendar-color: #20bf6b;
+$finance-color: #eb3b5a;
+$news-color: #4b6584;
+$location-color: #3867d6;
+$credits-color: #fd9644;
+$about-color: #2bcbba;
+$primary-nav: #0fb9b1;
+// $widget-font-size: 2rem;
+$widget-size: 2rem;
+// @use 'headers';
+// @use 'nav';
+
+
+
+@mixin widget-layout() {
+  display: flex;
+  flex-flow: column wrap;
+  text-align: center;
+  justify-content: center;
+}
+
+@mixin widget-primary($font-size) {
+  font-size: $font-size;
+  font-weight: bold;
+}
+
+@mixin widget-secondary() {
+  font-size: 1.35rem;
+}
+
+// @mixin popup-layout() {
+//   display: grid;
+//   grid-template: 1fr 5fr 1fr / 1fr;
+//   grid-template-areas: "title content .";
+//   height: 100vh;
+// }
+
+// @mixin popup-layout() {
+//   display: grid;
+//   grid-template: 1fr 11fr / 1fr;
+//   grid-template-areas: "title content";
+// }
+
+// @mixin header-layout() {
+//   position: relative;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   text-align: center;
+//   height: 10%;
+// }
+
+
+html {
+  font: 16px $font;
+  // font-size: 62.5%;
+  // font-family: $font;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  color: #FFF;
+  // overflow: hidden;
+}
+
+@mixin header-layout() {
+  font-size: 2rem;
+  display: grid;
+  grid-area: header;
+  grid-template: 1fr / 1fr 5fr 1fr;
+  grid-template-areas: ". title btn";
+  // align-items: center;
+}
+
+@mixin button-override() {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #FFF;
+  padding: 0;
+}
+
+
+header[class$="-header"] {
+  @include header-layout();
+  // background: #000;
+  // font-family: 'Tahoma', sans-serif;
+  // font-size: 2rem;
+  // display: grid;
+  // grid-template: 1fr / 1fr 5fr 1fr;
+  // grid-template-areas:
+  // ". title btn";
+}
+
+header[class$="-header__title"] {
+  grid-area: title;
+  text-align: baseline;
+}
+
+button[class$="-header__close"] {
+  grid-area: btn;
+  // margin: auto;
+  // font-size: 1.5rem;
+  @include button-override();
+}
+
+
+.nav--primary {
+  display: none;
+}
+
+.widgets {
+  display: grid;
+  grid-template: 1fr 5fr 5fr / repeat(2, 1fr);
+  grid-template-areas:
+    "header header"
+    "weather calendar"
+    "finance news";
+  width: 100%;
+  height: 100vh;
+}
+
+
+.main-header {
+  color: #000;
+  @include header-layout();
+}
+
+.main-header__title {
+  grid-area: title;
+  text-align: center;
+}
+
+
+
+.weather-widget {
+  grid-area: weather;
+  background: $weather-color;
+  @include widget-layout();
+}
+
+@mixin widgetFlex($basis) {
+  flex: 0.5 1 $basis;
+}
+
+.weather-widget__icon {
+  @include widgetFlex(50%);
+}
+
+.weather-widget__temp {
+  @include widget-primary($widget-size);
+  @include widgetFlex(20%);
+}
+
+.weather-widget__type {
+  @include widget-secondary();
+  @include widgetFlex(20%);
+}
+
+.calendar-widget {
+  grid-area: calendar;
+  background: $calendar-color;
+  @include widget-layout();
+}
+
+.calendar-widget__date {
+  @include widget-primary(4rem);
+}
+
+.calendar-widget__day {
+  @include widget-secondary();
+}
+
+.calendar-widget__month {
+  @include widget-secondary();
+}
+
+.finance-widget {
+  grid-area: finance;
+  background: $finance-color;
+  @include widget-layout();
+  font-family: 'Segoe UI', 'Helvetica', 'Open Sans', sans-serif;
+}
+
+.finance-widget__price {
+  @include widget-primary($widget-size);
+}
+
+.finance-widget__name {
+  @include widget-secondary();
+}
+
+
+.finance-widget__changes {
+  @include widget-secondary();
+}
+
+.news-widget {
+  grid-area: news;
+  background: $news-color;
+  @include widget-layout();
+}
+
+.news-widget__headline {
+  @include widget-primary($widget-size);
+  font-family: 'Tahoma', 'Verdana', 'Geneva' sans-serif;
+}
+
+// .weather-popup {
+//   height: 100vh;
+//   background: $weather-color;
+//   display: grid;
+//   grid-template: 1fr 9fr / 1fr;
+//   grid-template-areas:
+//     "header"
+//     "content";
+//
+// }
+@mixin popup-layout($background-color) {
+  height: 100vh;
+  background: $background-color;
+  display: grid;
+  grid-template: 1fr 10fr / 1fr;
+  grid-template-areas:
+  "header"
+  "content";
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-popup {
+  @include popup-layout($weather-color);
+}
+
+.weather {
+  grid-area: content;
+}
+
+
+
+// .weather {
+//   grid-area: content;
+// }
+//
+// .temp {
+//   display: grid;
+//   grid-template: 1fr / 1fr 2fr 1fr;
+//   justify-content: space-around;
+// }
+//
+// .temp__temp {
+//   font-size: 2rem;
+// }
+
+
+.calendar-popup {
+  background: $calendar-color;
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+  // height: 100vh;
+  min-height: 100vh;
+  // justify-content: space-around;
+  // align-items: center;
+}
+
+.calendar {
+  min-height: 90vh;
+}
+
+.month {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.day {
+  display: grid;
+  grid-template: repeat(5, minmax(20% 20%)) / repeat(7, minmax(14% 14%));
+  font-weight: 1.5rem;
+  align-items: center;
+}
+
+.cell__date {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.finance-popup {
+  // background: $finance-color;
+  @include popup-layout($finance-color);
+}
+
+.news-popup {
+  @include popup-layout($news-color);
+}
+
+.location {
+  // background: $location-color;
+  @include popup-layout($location-color);
+  grid-template: 1fr 10fr / 1fr;
+}
+
+.credits {
+  @include popup-layout($credits-color);
+  grid-template: 1fr 10fr / 1fr;
+}
+
+.about {
+  @include popup-layout($about-color);
+  grid-template: 1fr 10fr / 1fr;
+}

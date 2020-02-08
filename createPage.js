@@ -9,7 +9,6 @@ import {elementStr, blockStr, findIcon} from './stringify.js';
 const createWidget = (starter, selector, keys, data, tag) => {
   let content = '';
   let block = document.querySelector(`.${selector}`);
-  // content +=blockStr(starter, selector, keys, data, tag);
   content += blockStr(starter, keys, data, tag);
   block.innerHTML = content;
   return content;
@@ -44,7 +43,7 @@ const newsWidget = headline => {
 
 //END WIDGETS
 
-const header = (headerName , name) => {
+const header = (headerName, name) => {
   let title = elementStr('h4', 'title', name);
   let btn = elementStr('button', 'close', 'X');
   let block = `<header class="${headerName}">${title + btn}</header>`;
@@ -58,7 +57,7 @@ const weather = (data, city) => {
   temp = `<div class="temp">${temp}</div>`;
   let _city = elementStr('div', 'city', city);
   let details = blockStr('', ['type', 'description'], data, 'div');
-  let content = canvas + temp + _city + details;
+  let content = canvas + temp + elementStr('div', 'weather-details', _city + details);
   document.querySelector('.weather').innerHTML = content;
   let node = document.querySelector('.weather-popup');
   node.innerHTML = header('header', 'Weather') + node.innerHTML;
@@ -68,15 +67,12 @@ const weather = (data, city) => {
 
 
 const calendarWeek = () => {
-  // let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   let days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
   let block = '';
-  // for (let key in days) {
-  //   block += elementStr('div', 'calendar-content__week', days[key]);
-  // }
-  // return block;
-  block = blockStr('', Object.keys(days), days, 'div');
-  return elementStr('div', 'week', block);
+  for (let day in days) {
+    block += elementStr('div', 'cell', days[day]);
+  }
+  return block;
 }
 
 
@@ -108,20 +104,18 @@ const calendarDay = (holidays, start, end) => {
     }
     content += dateCell(day, holiday);
   }
-  // return content;
-  return elementStr('div', 'day', content);
+  return content;
 }
 
 
 
 const calendar = data => {
-  let month = elementStr('div', 'month', data.month);
   let week = calendarWeek();
   let day = calendarDay(data.holidays, data.monthStart, data.monthEnd);
-  let content = month + week + day;
+  let content = week + day;
   document.querySelector('.calendar').innerHTML = content;
   let node = document.querySelector('.calendar-popup', 'Calendar');
-  node.innerHTML = header('header', 'Calendar') + node.innerHTML;
+  node.innerHTML = header('header', data.month) + node.innerHTML;
 }
 
 const news = data => {
@@ -134,13 +128,13 @@ const news = data => {
   }
   let node = document.querySelector('.news-popup');
   node.innerHTML = header('header', 'News') + node.innerHTML;
+  console.log(data);
 }
 
 const finance = data => {
   let content = '';
   for (let type in data) {
     data[type].map(item => {
-      // let header = elementStr('h5', 'secondary-header', item.name);
       let info = blockStr('', ['ticker','price', 'changes'], item, 'div');
       let _content = elementStr('article', type, info);
       content += _content;
@@ -190,13 +184,6 @@ const createMap = (lon, lat) => {
   map.addLayer(markerLayer);
 }
 
-// const location = ({cc, city, coordinates}) => {
-//   let [lat, lon] = coordinates;
-//   createMap(lon, lat);
-//   document.querySelector('.cc').innerText = cc.toUpperCase();
-//   document.querySelector('.city').innerText = city;
-// }
-
 const location = data => {
   let [lat, lon] = data.coordinates;
   createMap(lon, lat);
@@ -210,10 +197,10 @@ export const createPage = (user) => {
   weatherWidget(user.weather);
   calendarWidget(user.calendar);
   console.log(user.finance.crypto);
-  // financeWidget(user.finance.crypto[0]);
-  // newsWidget(user.news.national);
-  // financeWidget(user.finance.indexes[0]);
-  // newsWidget(user.news.world[0]);
+  financeWidget(user.finance.crypto[0]);
+  newsWidget(user.news.national);
+  financeWidget(user.finance.indexes[0]);
+  newsWidget(user.news.world[0]);
 
   //popups
   weather(user.weather, user.location.city);
@@ -238,5 +225,3 @@ export const createPage = (user) => {
 export function updateLocation(locationObj) {
   location(locationObj);
 }
-
-// export {createPage};

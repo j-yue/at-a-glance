@@ -1,0 +1,22 @@
+@import './variables';
+
+@mixin flex($dir, $wrap, $justify, $align) {
+    display: flex;
+    flex-flow: $dir $wrap;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin row($wrap) {
+    display: flex;
+    flex-flow: row $wrap;
+}
+
+@mixin column($wrap) {
+    display: flex;
+    flex-flow: column $wrap;
+}
+
+@mixin center($dir, $wrap) {
+    @include flex($dir, $wrap, space-evenly, center);
+}

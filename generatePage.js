@@ -4,27 +4,31 @@ import {DEFAULT_DATA} from './defaultData.js';
 import {createPage, updateLocation} from './createPage.js';
 import {viewPopup, closePopup, viewNewsTab, viewFinanceTab} from './eventHandlers.js';
 // import * from './eventHandlers';
-let user;
-let lastSession = localStorage.getItem('lastSession');
+// let user;
+// let lastSession = localStorage.getItem('lastSession');
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(lastSession);
+  let user = new UserData(DEFAULT_DATA);
+  console.log(user);
+  createPage(user);
 
-  if (!lastSession) {
-    user = new UserData(DEFAULT_DATA);
-    // user.saveCoords();
-    console.log('hi');
-  } else {
-    user = new UserData(JSON.parse(lastSession));
-  }
+  // console.log(lastSession);
+
+  // if (!lastSession) {
+  //   user = new UserData(DEFAULT_DATA);
+  //   // user.saveCoords();
+  //   console.log('hi');
+  // } else {
+  //   user = new UserData(JSON.parse(lastSession));
+  // }
 
   // await user.saveCoords().then(() => console.log(user.location));
 
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition(async position => {
-      let [lat, lon] = [position.coords.latitude, position.coords.longitude];
+  // if ('geolocation' in navigator) {
+    // navigator.geolocation.getCurrentPosition(async position => {
+    //   let [lat, lon] = [position.coords.latitude, position.coords.longitude];
       // let res = await user.reverseGeocode(lat, lon);
       // console.log(res);
       // let refresh = new Promise((resolve, reject) => {
@@ -39,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // return Promise.all([this.saveDate(), this.saveNews(), this.saveFinance(), this.saveWeather()]);
 
-      user.saveWeather().then(() => console.log(user));
+      // user.saveWeather().then(() => console.log(user));
       // user.refreshPage(createPage(user));
       // console.log(user);
       // await user.refresh().then(() => user).then(res => createPage(res));
@@ -47,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // user.refreshUpdate(createPage(user));
       // await user.reverseGeocode(lat, lon).then(() => user.refresh()).then(() => createPage(user));
       // await user.reverseGeocode().then(res => console.log(user.location));
-    });
-  }
+  //   });
+  // }
 
   // console.log(promise1());
   // let res = await user.reverseGeocode
@@ -64,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // await user.refresh().then(() => createPage(user));
 
 
-  console.log(user);
+  // console.log(user);
   // (!lastSession) ? user = new UserData(DEFAULT_DATA) : user = new UserData(JSON.parse(lastSession));
   // await user.refresh().then(() => user.storeData());
   // console.log(updatePage());
@@ -142,9 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(user.location);
   });
 
-  document.querySelector('.refresh').addEventListener('click', () => {
+  // document.querySelector('.refresh').addEventListener('click', () => {
 
-  });
+  // });
   
   
 

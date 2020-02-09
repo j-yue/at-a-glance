@@ -1,17 +1,30 @@
-// @import './_variables';
-// @import './_mixins';
-
 /**
-POPUPS and ACTIONS
+TABLE OF CONTENTS
+1. shared styles
+    a. layout
+    b. header
+2. weather
+3. calendar
+4. finance + news
+    a. shared styles
+    b. finance
+    c. news
 */
 
+/*********************SHARED STYLES***********************/
+// LAYOUT
 .popup > article {
-    // display: relative;
     height: 100vh;
     width: 100%;
     font-size: 1.5rem;
 }
 
+.weather, .calendar, .finance, .news {
+    height: $content-height;
+    padding: $popup-padding;
+}
+
+// HEADER
 .header {
     height: $header-height;
     @include center(row, nowrap);
@@ -42,11 +55,8 @@ POPUPS and ACTIONS
     color: #fff;
 }
 
-.weather, .calendar, .finance, .news, .location-content, .credits-content, .about-content {
-    height: $content-height;
-    padding: $popup-padding;
-}
 
+/*********************WEATHER***********************/
 .weather {
     @include column(nowrap);
 }
@@ -73,6 +83,7 @@ POPUPS and ACTIONS
 }
 
 
+/*********************CALENDAR***********************/
 .calendar {
     @include center(row, wrap);
     text-align: center;
@@ -91,6 +102,9 @@ POPUPS and ACTIONS
     font-size: .75rem;
 }
 
+
+/*********************FINANCE + NEWS***********************/
+// SHARED STYLES
 .finance-nav, .news-nav {
     padding: $nav-padding;
     margin: 0;
@@ -98,26 +112,11 @@ POPUPS and ACTIONS
     transition: $transition-hover;
 }
 
-
-.finance-nav {
-    color: $finance-color;
-}
-
-.news-nav {
-    color: $news-color;
-}
-
-
-.finance {
-    @include column(nowrap);
-}
-
-.finance .tab {
-    flex-grow: 1;
+.tab {
+    height: 100%;
 }
 
 .finance-nav li, .news-nav li {
-    // background: white;
     padding: $nav-padding;
     border-radius: $radius;
     transition: $transition-hover;
@@ -135,6 +134,18 @@ POPUPS and ACTIONS
     color: $hover-tab;
 }
 
+.changes::after {
+    content: '%';
+}
+
+// FINANCE
+.finance {
+    @include column(nowrap);
+}
+
+.finance-nav {
+    color: $finance-color;
+}
 
 .indexes-info, .crypto-info {
     height: 100%;
@@ -142,10 +153,6 @@ POPUPS and ACTIONS
     text-align: center;
     display: none;
     padding: $nav-padding;
-}
-
-.changes::after {
-    content: '%';
 }
 
 .indexes-info article, .crypto-info article {
@@ -159,6 +166,7 @@ POPUPS and ACTIONS
     display: flex;
 }
 
+// NEWS
 .national-headlines, .world-headlines, .business-headlines {
     display: none;
 }
@@ -167,9 +175,10 @@ POPUPS and ACTIONS
     @include column(nowrap);
 }
 
-.news .tab {
-    height: 100%;
+.news-nav {
+    color: $news-color;
 }
+
 .active-headlines {
     height: inherit;
     @include center(column, nowrap);

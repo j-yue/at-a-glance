@@ -1,14 +1,20 @@
-// @import './_variables';
-// @import './_mixins';
+/**
+TABLE OF CONTENTS
+1. layout
+2. location
+3. credits
+4. about
+*/
 
+/*********************LAYOUT***********************/
 .location-content, .credits-content, .about-content {
     @include flex(column, nowrap, stretch, center);
+    height: $content-height;
+    padding: $popup-padding;
 }
 
-.location-content {
-    flex-grow: 1;
-}
 
+/*********************LOCATION***********************/
 .location-details {
     width: 100%;
     display: grid;
@@ -17,7 +23,6 @@
     "cc btn";
     padding: 10px 0;
 }
-
 
 .map {
     width: 100%;
@@ -57,6 +62,8 @@
     color: inherit;
 }
 
+
+/*********************CREDITS***********************/
 .credits-list {
     flex-grow: 1;
     @include flex(column, nowrap, space-evenly, stretch);
@@ -72,6 +79,8 @@
     color: inherit;
 }
 
+
+/*********************ABOUT***********************/
 .about-content {
     text-align: justify;
 }

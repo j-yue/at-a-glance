@@ -329,6 +329,14 @@ TABLE OF CONTENTS
   background: #000;
 }
 
+/**
+TABLE OF CONTENTS
+1. layout
+2. location
+3. credits
+4. about
+*/
+/*********************LAYOUT***********************/
 .location-content, .credits-content, .about-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -343,14 +351,11 @@ TABLE OF CONTENTS
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 85vh;
+  padding: 1rem;
 }
 
-.location-content {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-}
-
+/*********************LOCATION***********************/
 .location-details {
   width: 100%;
   display: -ms-grid;
@@ -433,6 +438,7 @@ TABLE OF CONTENTS
   color: inherit;
 }
 
+/*********************CREDITS***********************/
 .credits-list {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
@@ -462,6 +468,7 @@ TABLE OF CONTENTS
   color: inherit;
 }
 
+/*********************ABOUT***********************/
 .about-content {
   text-align: justify;
 }

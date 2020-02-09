@@ -1,51 +1,37 @@
+/**
+TABLE OF CONTENTS
+1. imports
+2. main layout
+3. tags
+4. primary nav
+5. main screen
+    a. main header
+    b. widgets
+6.
+*/
+
+
+/*******************************************************************
+IMPORTS
+*******************************************************************/
 @import './_variables';
 @import './_mixins';
 @import './_popups';
 @import './_actions';
-
-$screen-colors: (
-    'weather': $weather-color,
-    'calendar': $calendar-color,
-    'finance': $finance-color,
-    'news': $news-color,
-    'location': $location-color,
-    'about': $about-color,
-    'credits': $credits-color,
-);
-
-$screen-fonts: (
-    'calendar': $calendar-font,
-    'finance': $finance-font,
-    'news': $news-font,
-);
+@import './_maps';
 
 
-@each $screen, $color in $screen-colors {
-    [data-screen="#{$screen}"] {
-        background: $color;
-    }
-}
-
-@each $screen, $font in $screen-fonts {
-    [data-screen="#{$screen}"] {
-        font-family: $font;
-    }
-}
-
+/*******************************************************************
+MAIN LAYOUT
+*******************************************************************/
 
 html {
     font-size: 16px;
 }
 
-* {
-    box-sizing: border-box;
-}
-
 body {
     min-height: 100vh;
     width: 100%;
-    // padding: 0;
-    // margin: 0;
     // overflow: hidden;
     position: absolute;
     color: $primary-color;
@@ -56,6 +42,10 @@ main {
     position: absolute;
     top: 0;
 }
+
+/*******************************************************************
+TAGS
+*******************************************************************/
 
 button:hover {
     cursor: pointer;
@@ -69,6 +59,11 @@ ul {
     padding: 0;
     margin: 0;
 }
+
+
+/*******************************************************************
+PRIMARY NAV
+*******************************************************************/
 
 .primary-nav {
     height: 15vh;
@@ -86,7 +81,10 @@ ul {
     height: inherit;
 }
 
-
+/*******************************************************************
+MAIN SCREEN
+*******************************************************************/
+//MAIN HEADER-------------------------------------------------------
 .main-header {
     height: $header-height;
     width: 100%;
@@ -103,7 +101,6 @@ ul {
     cursor: default;
 }
 
-
 .menu, .refresh {
     height: 50%;
     transition: $transition-hover;
@@ -117,6 +114,22 @@ ul {
 .menu:active, .refresh:active {
     transform: scale(.9);
 }
+
+//WIDGETS-----------------------------------------------------------
+//set the color and font of each popup and widget screen
+
+@each $screen, $color in $screen-colors {
+    [data-screen="#{$screen}"] {
+        background: $color;
+    }
+}
+
+@each $screen, $font in $screen-fonts {
+    [data-screen="#{$screen}"] {
+        font-family: $font;
+    }
+}
+
 
 .widgets {
     height: $content-height;

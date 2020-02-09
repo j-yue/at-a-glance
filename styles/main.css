@@ -1,4 +1,18 @@
 /**
+TABLE OF CONTENTS
+1. imports
+2. main layout
+3. tags
+4. primary nav
+5. main screen
+    a. main header
+    b. widgets
+6.
+*/
+/*******************************************************************
+IMPORTS
+*******************************************************************/
+/**
 POPUPS and ACTIONS
 */
 .popup > article {
@@ -448,53 +462,11 @@ POPUPS and ACTIONS
   text-align: justify;
 }
 
-[data-screen="weather"] {
-  background: #2d98da;
-}
-
-[data-screen="calendar"] {
-  background: #20bf6b;
-}
-
-[data-screen="finance"] {
-  background: #eb3b5a;
-}
-
-[data-screen="news"] {
-  background: #4b6584;
-}
-
-[data-screen="location"] {
-  background: #bdc3c7;
-}
-
-[data-screen="about"] {
-  background: #2d3436;
-}
-
-[data-screen="credits"] {
-  background: #1abc9c;
-}
-
-[data-screen="calendar"] {
-  font-family: "Verdana", sans-serif;
-}
-
-[data-screen="finance"] {
-  font-family: "Consolas", "Segoe UI", sans-serif;
-}
-
-[data-screen="news"] {
-  font-family: "Tahoma", "Verdana", sans-serif;
-}
-
+/*******************************************************************
+MAIN LAYOUT
+*******************************************************************/
 html {
   font-size: 16px;
-}
-
-* {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 body {
@@ -510,6 +482,9 @@ main {
   top: 0;
 }
 
+/*******************************************************************
+TAGS
+*******************************************************************/
 button:hover {
   cursor: pointer;
 }
@@ -523,6 +498,9 @@ ul {
   margin: 0;
 }
 
+/*******************************************************************
+PRIMARY NAV
+*******************************************************************/
 .primary-nav {
   height: 15vh;
   position: relative;
@@ -547,6 +525,9 @@ ul {
   height: inherit;
 }
 
+/*******************************************************************
+MAIN SCREEN
+*******************************************************************/
 .main-header {
   height: 15vh;
   width: 100%;
@@ -590,6 +571,46 @@ ul {
 .menu:active, .refresh:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
+}
+
+[data-screen="weather"] {
+  background: #2d98da;
+}
+
+[data-screen="calendar"] {
+  background: #20bf6b;
+}
+
+[data-screen="finance"] {
+  background: #eb3b5a;
+}
+
+[data-screen="news"] {
+  background: #4b6584;
+}
+
+[data-screen="location"] {
+  background: #bdc3c7;
+}
+
+[data-screen="about"] {
+  background: #2d3436;
+}
+
+[data-screen="credits"] {
+  background: #1abc9c;
+}
+
+[data-screen="calendar"] {
+  font-family: "Verdana", sans-serif;
+}
+
+[data-screen="finance"] {
+  font-family: "Consolas", "Segoe UI", sans-serif;
+}
+
+[data-screen="news"] {
+  font-family: "Tahoma", "Verdana", sans-serif;
 }
 
 .widgets {

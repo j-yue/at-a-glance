@@ -1,0 +1,16 @@
+$screen-colors: (
+    'weather': $weather-color,
+    'calendar': $calendar-color,
+    'finance': $finance-color,
+    'news': $news-color,
+    'location': $location-color,
+    'about': $about-color,
+    'credits': $credits-color,
+);
+
+$screen-fonts: (
+    'calendar': $calendar-font,
+    'finance': $finance-font,
+    'news': $news-font,
+);
+

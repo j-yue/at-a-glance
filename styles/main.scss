@@ -1,44 +1,30 @@
+/**
+TABLE OF CONTENTS
+1. imports
+2. layout
+3. tags
+4. primary nav
+5. main screen
+    a. main header
+    b. widgets
+*/
+
+
+
+/**************************************************************
+IMPORTS
+***************************************************************/
 @import './_variables';
 @import './_mixins';
 @import './_popups';
 @import './_actions';
 
-$screen-colors: (
-    'weather': $weather-color,
-    'calendar': $calendar-color,
-    'finance': $finance-color,
-    'news': $news-color,
-    'location': $location-color,
-    'about': $about-color,
-    'credits': $credits-color,
-);
 
-$screen-fonts: (
-    'calendar': $calendar-font,
-    'finance': $finance-font,
-    'news': $news-font,
-);
-
-
-@each $screen, $color in $screen-colors {
-    [data-screen="#{$screen}"] {
-        background: $color;
-    }
-}
-
-@each $screen, $font in $screen-fonts {
-    [data-screen="#{$screen}"] {
-        font-family: $font;
-    }
-}
-
-
+/**************************************************************
+LAYOUT
+***************************************************************/
 html {
     font-size: 16px;
-}
-
-* {
-    box-sizing: border-box;
 }
 
 body {
@@ -57,6 +43,10 @@ main {
     top: 0;
 }
 
+
+/**************************************************************
+TAGS
+***************************************************************/
 button:hover {
     cursor: pointer;
 }
@@ -70,6 +60,10 @@ ul {
     margin: 0;
 }
 
+
+/**************************************************************
+PRIMARY NAV
+***************************************************************/
 .primary-nav {
     height: 15vh;
     position: relative;
@@ -87,6 +81,10 @@ ul {
 }
 
 
+/**************************************************************
+MAIN SCREEN
+***************************************************************/
+// MAIN HEADER
 .main-header {
     height: $header-height;
     width: 100%;
@@ -117,6 +115,20 @@ ul {
 .menu:active, .refresh:active {
     transform: scale(.9);
 }
+
+// WIDGETS
+@each $screen, $color in $screen-colors {
+    [data-screen="#{$screen}"] {
+        background: $color;
+    }
+}
+
+@each $screen, $font in $screen-fonts {
+    [data-screen="#{$screen}"] {
+        font-family: $font;
+    }
+}
+
 
 .widgets {
     height: $content-height;

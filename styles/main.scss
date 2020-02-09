@@ -57,19 +57,56 @@ ul {
 
 /*********************PRIMARY NAV***********************/
 .primary-nav {
+    height: $header-height;
+    width: 100%;
+    position: relative;
+    background: $primary-nav-bg;
+    z-index: 1000;
+    font-size: $font-size;
+    font-weight: bold;
+}
+
+
+.inactive-nav {
     height: 15vh;
     position: relative;
     top: -15vh;
 }
 
 .links {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    height: inherit;
+    @include center(row, nowrap);
+    height: 100%;
+}
+
+.link, .primary-close {
+    padding: .5rem;
+    transition: $transition-hover;
+    border-radius: $radius;
+}
+
+.links li:hover {
+    cursor: pointer;
+    background: $primary-color;
+    color: $primary-nav-bg;
+}
+
+
+@keyframes slideDown {
+    from {
+        top: -15vh;
+    }
+    to {
+        top: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        top: 0;
+    }
+    to {
+        top: -15vh;
+    }
 }
 
 

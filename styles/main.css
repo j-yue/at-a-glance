@@ -556,6 +556,16 @@ ul {
 /*********************PRIMARY NAV***********************/
 .primary-nav {
   height: 15vh;
+  width: 100%;
+  position: relative;
+  background: #000;
+  z-index: 1000;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.inactive-nav {
+  height: 15vh;
   position: relative;
   top: -15vh;
 }
@@ -568,14 +578,44 @@ ul {
   -webkit-box-direction: normal;
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0;
-  padding: 0;
-  height: inherit;
+  height: 100%;
+}
+
+.link, .primary-close {
+  padding: .5rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  border-radius: 10px;
+}
+
+.links li:hover {
+  cursor: pointer;
+  background: #FFF;
+  color: #000;
+}
+
+@keyframes slideDown {
+  from {
+    top: -15vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    top: 0;
+  }
+  to {
+    top: -15vh;
+  }
 }
 
 /*********************MAIN SCREEN***********************/

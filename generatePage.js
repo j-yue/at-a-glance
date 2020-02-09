@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     widget.addEventListener('click', () => viewPopup(widget.className.split('-')[0] + '-popup'));
   });
 
+  // document.querySelector('.menu').addEventListener('click', () => viewMenu());
   
 
   document.querySelectorAll('.link').forEach(link => {
@@ -104,6 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // console.log(link.innerText.toLowerCase())
       viewPopup(link.innerText.toLowerCase());
       document.querySelector('.primary-nav').classList.add('inactive-nav');
+      // document.querySelector('.primary-nav')
+      // viewMenu();
     });
   });
 
@@ -128,11 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelector('.primary-close').addEventListener('click', () => {
+    document.querySelector('.primary-nav').style.animation = 'slideUp 1s';
     document.querySelector('.primary-nav').classList.add('inactive-nav');
   });
 
   document.querySelector('.menu').addEventListener('click', () => {
     document.querySelector('.inactive-nav').classList.remove('inactive-nav');
+    document.querySelector('.primary-nav').style.animation = 'slideDown 1s';
   });
   
   document.querySelector('.location-btn').addEventListener('click', () => {

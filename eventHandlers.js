@@ -66,3 +66,4 @@ export function viewNewsTab(tab, headlines) {
 export function viewFinanceTab(tab, content) {
     viewTab('active-finance-tab', 'active-finance', tab, content);
 }
+

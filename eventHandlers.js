@@ -1,19 +1,19 @@
 
   /**
-   * View popup screen selected from clicked widget in main screen
+   * Slide up selected widget into view
    */
 export function viewPopup(sel) {
     let popup = document.querySelector(`.${sel}`);
     popup.classList.toggle('active-popup');
-    document.querySelector('.primary-nav').classList.add('inactive-nav');//hide primary nav if active and widget clicked
+    popup.style.animation = 'slideUp 1s';
 }
 
-
 /**
-   * Close active popup
+   * Slide down widget when closing popup 
    */
 export function closePopup(sel) {
-    sel.classList.toggle('active-popup');
+    sel.style.animation = 'slideDown 1s';
+    setTimeout(() => sel.classList.toggle('active-popup'), 1000);
 }
 
 

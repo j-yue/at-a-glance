@@ -14,6 +14,7 @@ TABLE OF CONTENTS
 1. shared styles
     a. layout
     b. header
+    c. active popup
 2. weather
 3. calendar
 4. finance + news
@@ -77,6 +78,48 @@ TABLE OF CONTENTS
   text-align: center;
   font-size: 2rem;
   color: #fff;
+}
+
+@-webkit-keyframes slideUp {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@-webkit-keyframes slideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100vh;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100vh;
+  }
+}
+
+.active-popup {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
 }
 
 /*********************WEATHER***********************/

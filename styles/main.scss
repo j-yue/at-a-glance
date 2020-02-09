@@ -1,37 +1,35 @@
 /**
 TABLE OF CONTENTS
 1. imports
-2. main layout
+2. layout
 3. tags
 4. primary nav
 5. main screen
     a. main header
     b. widgets
-6.
 */
 
-
-/*******************************************************************
-IMPORTS
-*******************************************************************/
+/*********************IMPORTS***********************/
 @import './_variables';
 @import './_mixins';
 @import './_popups';
 @import './_actions';
-@import './_maps';
 
 
-/*******************************************************************
-MAIN LAYOUT
-*******************************************************************/
-
+/*********************LAYOUT***********************/
 html {
     font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
     min-height: 100vh;
     width: 100%;
+    // padding: 0;
+    // margin: 0;
     // overflow: hidden;
     position: absolute;
     color: $primary-color;
@@ -43,10 +41,7 @@ main {
     top: 0;
 }
 
-/*******************************************************************
-TAGS
-*******************************************************************/
-
+/*********************TAGS***********************/
 button:hover {
     cursor: pointer;
 }
@@ -60,11 +55,7 @@ ul {
     margin: 0;
 }
 
-
-/*******************************************************************
-PRIMARY NAV
-*******************************************************************/
-
+/*********************PRIMARY NAV***********************/
 .primary-nav {
     height: 15vh;
     position: relative;
@@ -81,10 +72,9 @@ PRIMARY NAV
     height: inherit;
 }
 
-/*******************************************************************
-MAIN SCREEN
-*******************************************************************/
-//MAIN HEADER-------------------------------------------------------
+
+/*********************MAIN SCREEN***********************/
+// MAIN HEADER
 .main-header {
     height: $header-height;
     width: 100%;
@@ -101,6 +91,7 @@ MAIN SCREEN
     cursor: default;
 }
 
+
 .menu, .refresh {
     height: 50%;
     transition: $transition-hover;
@@ -115,9 +106,26 @@ MAIN SCREEN
     transform: scale(.9);
 }
 
-//WIDGETS-----------------------------------------------------------
-//set the color and font of each popup and widget screen
+// WIDGETS
 
+// map each widget and screen type to a color and font
+$screen-colors: (
+    'weather': $weather-color,
+    'calendar': $calendar-color,
+    'finance': $finance-color,
+    'news': $news-color,
+    'location': $location-color,
+    'about': $about-color,
+    'credits': $credits-color,
+);
+
+$screen-fonts: (
+    'calendar': $calendar-font,
+    'finance': $finance-font,
+    'news': $news-font,
+);
+
+//set each screen and widget type's color and font
 @each $screen, $color in $screen-colors {
     [data-screen="#{$screen}"] {
         background: $color;
@@ -129,7 +137,6 @@ MAIN SCREEN
         font-family: $font;
     }
 }
-
 
 .widgets {
     height: $content-height;

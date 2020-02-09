@@ -1,0 +1,169 @@
+/**
+TABLE OF CONTENTS
+1. imports
+2. layout
+3. tags
+4. primary nav
+5. main screen
+    a. main header
+    b. widgets
+*/
+
+/*********************IMPORTS***********************/
+@import './_variables';
+@import './_mixins';
+@import './_popups';
+@import './_actions';
+
+
+/*********************LAYOUT***********************/
+html {
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    // padding: 0;
+    // margin: 0;
+    // overflow: hidden;
+    position: absolute;
+    color: $primary-color;
+    font-family: $font;
+}
+
+main {
+    position: absolute;
+    top: 0;
+}
+
+/*********************TAGS***********************/
+button:hover {
+    cursor: pointer;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+/*********************PRIMARY NAV***********************/
+.primary-nav {
+    height: 15vh;
+    position: relative;
+    top: -15vh;
+}
+
+.links {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: inherit;
+}
+
+
+/*********************MAIN SCREEN***********************/
+// MAIN HEADER
+.main-header {
+    height: $header-height;
+    width: 100%;
+    @include center(row, nowrap);
+    padding: 0 1rem;
+}
+
+.main-header .title {
+    margin: 0;
+    color: #000;
+}
+
+.main-header .title:hover {
+    cursor: default;
+}
+
+
+.menu, .refresh {
+    height: 50%;
+    transition: $transition-hover;
+}
+
+.menu:hover, .refresh:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.menu:active, .refresh:active {
+    transform: scale(.9);
+}
+
+// WIDGETS
+
+// map each widget and screen type to a color and font
+$screen-colors: (
+    'weather': $weather-color,
+    'calendar': $calendar-color,
+    'finance': $finance-color,
+    'news': $news-color,
+    'location': $location-color,
+    'about': $about-color,
+    'credits': $credits-color,
+);
+
+$screen-fonts: (
+    'calendar': $calendar-font,
+    'finance': $finance-font,
+    'news': $news-font,
+);
+
+//set each screen and widget type's color and font
+@each $screen, $color in $screen-colors {
+    [data-screen="#{$screen}"] {
+        background: $color;
+    }
+}
+
+@each $screen, $font in $screen-fonts {
+    [data-screen="#{$screen}"] {
+        font-family: $font;
+    }
+}
+
+.widgets {
+    height: $content-height;
+    @include center(row, wrap);
+}
+
+.widgets > section {
+    width: 50%;
+    height: calc(85vh / 2);
+    @include center(column, nowrap);
+    font-size: $font-size;
+    text-align: center;
+    padding: $widget-padding;
+    transition: $transition-hover;
+}
+
+.widgets > section:hover {
+    background: $hover-widget;
+    cursor: pointer;
+}
+
+.main-screen .date, .main-screen .price, .headline {
+    font-weight: bold;
+}
+
+.main-screen .date, .main-screen .price {
+    font-size: $large-text;
+}
+
+

@@ -1,0 +1,676 @@
+/**
+TABLE OF CONTENTS
+1. imports
+2. layout
+3. tags
+4. primary nav
+5. main screen
+    a. main header
+    b. widgets
+*/
+/*********************IMPORTS***********************/
+/**
+TABLE OF CONTENTS
+1. shared styles
+    a. layout
+    b. header
+2. weather
+3. calendar
+4. finance + news
+    a. shared styles
+    b. finance
+    c. news
+*/
+/*********************SHARED STYLES***********************/
+.popup > article {
+  height: 100vh;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.weather, .calendar, .finance, .news {
+  height: 85vh;
+  padding: 1rem;
+}
+
+.header {
+  height: 15vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.close {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  position: relative;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: none;
+  color: #fff;
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.close:hover {
+  background: #000;
+  color: #fff;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+}
+
+/*********************WEATHER***********************/
+.weather {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.weather-icon-popup {
+  min-width: 40%;
+  max-height: 60%;
+  margin: auto;
+  display: block;
+}
+
+.temp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.current {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.weather-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+/*********************CALENDAR***********************/
+.calendar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
+.cell:nth-child(-n + 7) {
+  font-weight: bold;
+}
+
+.cell {
+  width: 14%;
+}
+
+.holiday {
+  font-size: .75rem;
+}
+
+/*********************FINANCE + NEWS***********************/
+.finance-nav, .news-nav {
+  padding: 0.75rem;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.tab {
+  height: 100%;
+}
+
+.finance-nav li, .news-nav li {
+  padding: 0.75rem;
+  border-radius: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #FFF;
+}
+
+.finance-nav li:hover, .news-nav li:hover {
+  cursor: pointer;
+  background: #000;
+}
+
+.active-finance-tab, .active-news-tab {
+  background: #000 !important;
+  color: #000;
+}
+
+.changes::after {
+  content: '%';
+}
+
+.finance {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.finance-nav {
+  color: #eb3b5a;
+}
+
+.indexes-info, .crypto-info {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  display: none;
+  padding: 0.75rem;
+}
+
+.indexes-info article, .crypto-info article {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 32%;
+  background: white;
+  color: #eb3b5a;
+}
+
+.active-finance {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.national-headlines, .world-headlines, .business-headlines {
+  display: none;
+}
+
+.news {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.news-nav {
+  color: #4b6584;
+}
+
+.active-headlines {
+  height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.active-headlines li {
+  width: 100%;
+  font-size: 1.25rem;
+  text-align: center;
+  -webkit-box-flex: .9;
+      -ms-flex-positive: .9;
+          flex-grow: .9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.active-headlines li:nth-child(2n) {
+  background: #fff;
+  color: #4b6584;
+}
+
+.active-headlines li:nth-child(2n -1) {
+  background: #000;
+}
+
+/**
+TABLE OF CONTENTS
+1. layout
+2. location
+3. credits
+4. about
+*/
+/*********************LAYOUT***********************/
+.location-content, .credits-content, .about-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 85vh;
+  padding: 1rem;
+}
+
+/*********************LOCATION***********************/
+.location-details {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template: 1fr 1fr / 1fr 1fr;
+      grid-template-areas: "city btn" "cc btn";
+  padding: 10px 0;
+}
+
+.map {
+  width: 100%;
+  -webkit-box-flex: 1.5;
+      -ms-flex-positive: 1.5;
+          flex-grow: 1.5;
+}
+
+.city {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: city;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cc {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: cc;
+  font-weight: bold;
+  font-size: calc(1.5rem + .5rem);
+  text-transform: uppercase;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.location-btn {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  grid-area: btn;
+  border: none;
+  background: #000;
+  font-weight: bold;
+  color: #FFF;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.location-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.location-btn:active {
+  background: #888;
+  color: inherit;
+}
+
+/*********************CREDITS***********************/
+.credits-list {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.credits-list li {
+  list-style-type: square;
+  list-style-position: inside;
+}
+
+.credits-list a {
+  font-weight: bold;
+  color: inherit;
+}
+
+/*********************ABOUT***********************/
+.about-content {
+  text-align: justify;
+}
+
+/*********************LAYOUT***********************/
+html {
+  font-size: 16px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  position: absolute;
+  color: #FFF;
+  font-family: "Open Sans", sans-serif;
+}
+
+main {
+  position: absolute;
+  top: 0;
+}
+
+/*********************TAGS***********************/
+button:hover {
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+/*********************PRIMARY NAV***********************/
+.primary-nav {
+  height: 15vh;
+  position: relative;
+  top: -15vh;
+}
+
+.links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0;
+  height: inherit;
+}
+
+/*********************MAIN SCREEN***********************/
+.main-header {
+  height: 15vh;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 1rem;
+}
+
+.main-header .title {
+  margin: 0;
+  color: #000;
+}
+
+.main-header .title:hover {
+  cursor: default;
+}
+
+.menu, .refresh {
+  height: 50%;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.menu:hover, .refresh:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+}
+
+.menu:active, .refresh:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+[data-screen="weather"] {
+  background: #2d98da;
+}
+
+[data-screen="calendar"] {
+  background: #20bf6b;
+}
+
+[data-screen="finance"] {
+  background: #eb3b5a;
+}
+
+[data-screen="news"] {
+  background: #4b6584;
+}
+
+[data-screen="location"] {
+  background: #bdc3c7;
+}
+
+[data-screen="about"] {
+  background: #2d3436;
+}
+
+[data-screen="credits"] {
+  background: #1abc9c;
+}
+
+[data-screen="calendar"] {
+  font-family: "Verdana", sans-serif;
+}
+
+[data-screen="finance"] {
+  font-family: "Consolas", "Segoe UI", sans-serif;
+}
+
+[data-screen="news"] {
+  font-family: "Tahoma", "Verdana", sans-serif;
+}
+
+.widgets {
+  height: 85vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.widgets > section {
+  width: 50%;
+  height: calc(85vh / 2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.widgets > section:hover {
+  background: #888;
+  cursor: pointer;
+}
+
+.main-screen .date, .main-screen .price, .headline {
+  font-weight: bold;
+}
+
+.main-screen .date, .main-screen .price {
+  font-size: 3rem;
+}
+/*# sourceMappingURL=main.css.map */

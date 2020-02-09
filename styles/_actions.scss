@@ -1,0 +1,86 @@
+/**
+TABLE OF CONTENTS
+1. layout
+2. location
+3. credits
+4. about
+*/
+
+/*********************LAYOUT***********************/
+.location-content, .credits-content, .about-content {
+    @include flex(column, nowrap, stretch, center);
+    height: $content-height;
+    padding: $popup-padding;
+}
+
+
+/*********************LOCATION***********************/
+.location-details {
+    width: 100%;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    grid-template-areas: "city btn"
+    "cc btn";
+    padding: 10px 0;
+}
+
+.map {
+    width: 100%;
+    flex-grow: 1.5;
+}
+
+.city {
+    grid-area: city;
+    @include center(row, nowrap);
+}
+
+.cc {
+    grid-area: cc;
+    font-weight: bold;
+    font-size: calc(#{$font-size} + .5rem);
+    text-transform: uppercase;
+    @include center(row, nowrap);
+}
+
+.location-btn {
+    grid-area: btn;
+    border: none;
+    background: #000;
+    font-weight: bold;
+    color: $primary-color;
+    transition: $transition-hover;
+}
+
+.location-btn:hover {
+    background: #fff;
+    color: #000;
+
+}
+
+.location-btn:active {
+    background: #888;
+    color: inherit;
+}
+
+
+/*********************CREDITS***********************/
+.credits-list {
+    flex-grow: 1;
+    @include flex(column, nowrap, space-evenly, stretch);
+}
+
+.credits-list li {
+    list-style-type: square;
+    list-style-position: inside;
+}
+
+.credits-list a {
+    font-weight: bold;
+    color: inherit;
+}
+
+
+/*********************ABOUT***********************/
+.about-content {
+    text-align: justify;
+}

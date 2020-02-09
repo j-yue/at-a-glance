@@ -1,0 +1,203 @@
+/**
+TABLE OF CONTENTS
+1. shared styles
+    a. layout
+    b. header
+2. weather
+3. calendar
+4. finance + news
+    a. shared styles
+    b. finance
+    c. news
+*/
+
+/*********************SHARED STYLES***********************/
+// LAYOUT
+.popup > article {
+    height: 100vh;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.weather, .calendar, .finance, .news {
+    height: $content-height;
+    padding: $popup-padding;
+}
+
+// HEADER
+.header {
+    height: $header-height;
+    @include center(row, nowrap);
+}
+
+.close {
+    display: inline-flex;
+    align-self: flex-start;
+    position: relative;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background: none;
+    color: #fff;
+    font-weight: bold;
+    transition: $transition-hover;
+}
+
+.close:hover {
+    background: $hover-close-bg;
+    color: $hover-close-main    ;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+}
+
+
+/*********************WEATHER***********************/
+.weather {
+    @include column(nowrap);
+}
+
+.weather-icon-popup {
+    min-width: 40%;
+    max-height: 60%;
+    margin: auto;
+    display: block;
+}
+
+.temp {
+    @include center(row, nowrap);
+}
+
+.current {
+    font-size: $large-text;
+    font-weight: bold;
+}
+
+.weather-details {
+    @include center(column, nowrap);
+    flex-grow: 1;
+}
+
+
+/*********************CALENDAR***********************/
+.calendar {
+    @include center(row, wrap);
+    text-align: center;
+}
+
+
+.cell:nth-child(-n + 7) {
+    font-weight: bold;
+}
+
+.cell {
+    width: 14%;
+}
+
+.holiday {
+    font-size: .75rem;
+}
+
+
+/*********************FINANCE + NEWS***********************/
+// SHARED STYLES
+.finance-nav, .news-nav {
+    padding: $nav-padding;
+    margin: 0;
+    @include center(row, nowrap);
+    transition: $transition-hover;
+}
+
+.tab {
+    height: 100%;
+}
+
+.finance-nav li, .news-nav li {
+    padding: $nav-padding;
+    border-radius: $radius;
+    transition: $transition-hover;
+    color: $primary-color;
+
+}
+
+.finance-nav li:hover, .news-nav li:hover {
+    cursor: pointer;
+    background: $hover-tab;
+}
+
+.active-finance-tab, .active-news-tab {
+    background: $active-tab-bg !important;
+    color: $hover-tab;
+}
+
+.changes::after {
+    content: '%';
+}
+
+// FINANCE
+.finance {
+    @include column(nowrap);
+}
+
+.finance-nav {
+    color: $finance-color;
+}
+
+.indexes-info, .crypto-info {
+    height: 100%;
+    @include center(row, wrap);
+    text-align: center;
+    display: none;
+    padding: $nav-padding;
+}
+
+.indexes-info article, .crypto-info article {
+    align-self: center;
+    width: 32%;
+    background: white;
+    color: $finance-color;
+}
+
+.active-finance {
+    display: flex;
+}
+
+// NEWS
+.national-headlines, .world-headlines, .business-headlines {
+    display: none;
+}
+
+.news {
+    @include column(nowrap);
+}
+
+.news-nav {
+    color: $news-color;
+}
+
+.active-headlines {
+    height: inherit;
+    @include center(column, nowrap);
+}
+
+.active-headlines li {
+    width: 100%;
+    font-size: 1.25rem;
+    text-align: center;
+    flex-grow: .9;
+    @include center(row, wrap);
+}
+.active-headlines li:nth-child(2n) {
+    background: $headline-one;
+    color: $news-color;
+}
+
+.active-headlines li:nth-child(2n -1 ) {
+    background: $headline-two;
+}
+
+

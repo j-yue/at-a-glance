@@ -554,20 +554,61 @@ ul {
 }
 
 /*********************PRIMARY NAV***********************/
-.primary-nav {
-  height: 15vh;
-  width: 100%;
-  position: relative;
-  background: #000;
-  z-index: 1000;
-  font-size: 1.5rem;
-  font-weight: bold;
+@-webkit-keyframes slideInNav {
+  from {
+    top: -15vh;
+    z-index: 0;
+  }
+  to {
+    top: 0;
+    z-index: 1000;
+  }
+}
+@keyframes slideInNav {
+  from {
+    top: -15vh;
+    z-index: 0;
+  }
+  to {
+    top: 0;
+    z-index: 1000;
+  }
+}
+
+@-webkit-keyframes slideOutNav {
+  from {
+    top: 0;
+    z-index: 1000;
+  }
+  to {
+    top: -15vh;
+    z-index: 0;
+  }
+}
+
+@keyframes slideOutNav {
+  from {
+    top: 0;
+    z-index: 1000;
+  }
+  to {
+    top: -15vh;
+    z-index: 0;
+  }
 }
 
 .inactive-nav {
+  display: none;
+}
+
+.primary-nav {
   height: 15vh;
   position: relative;
-  top: -15vh;
+  z-index: 1000;
+  width: 100%;
+  background: #000;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .links {
@@ -578,44 +619,26 @@ ul {
   -webkit-box-direction: normal;
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 100%;
+  margin: 0;
+  padding: 0;
+  height: inherit;
 }
 
 .link, .primary-close {
-  padding: .5rem;
   -webkit-transition: 0.5s;
   transition: 0.5s;
-  border-radius: 10px;
+  padding: .5rem;
 }
 
-.links li:hover {
+.link:hover, .primary-close:hover {
   cursor: pointer;
-  background: #FFF;
+  background: #fff;
   color: #000;
-}
-
-@keyframes slideDown {
-  from {
-    top: -15vh;
-  }
-  to {
-    top: 0;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    top: 0;
-  }
-  to {
-    top: -15vh;
-  }
 }
 
 /*********************MAIN SCREEN***********************/

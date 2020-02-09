@@ -131,13 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.querySelector('.primary-close').addEventListener('click', () => {
-    document.querySelector('.primary-nav').style.animation = 'slideUp 1s';
-    document.querySelector('.primary-nav').classList.add('inactive-nav');
+    let nav = document.querySelector('.primary-nav');
+    nav.style.animation = 'slideOutNav 1s';
+    setTimeout(() => nav.classList.add('inactive-nav'), 1000);
   });
 
   document.querySelector('.menu').addEventListener('click', () => {
+    document.querySelector('.primary-nav').style.animation = 'slideInNav 1s';
     document.querySelector('.inactive-nav').classList.remove('inactive-nav');
-    document.querySelector('.primary-nav').style.animation = 'slideDown 1s';
   });
   
   document.querySelector('.location-btn').addEventListener('click', () => {

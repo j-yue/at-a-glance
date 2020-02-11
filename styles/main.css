@@ -14,6 +14,7 @@ TABLE OF CONTENTS
 1. shared styles
     a. layout
     b. header
+    c. active popup
 2. weather
 3. calendar
 4. finance + news
@@ -77,6 +78,48 @@ TABLE OF CONTENTS
   text-align: center;
   font-size: 2rem;
   color: #fff;
+}
+
+@-webkit-keyframes slideUp {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@-webkit-keyframes slideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100vh;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100vh;
+  }
+}
+
+.active-popup {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
 }
 
 /*********************WEATHER***********************/
@@ -211,7 +254,7 @@ TABLE OF CONTENTS
 }
 
 .changes::after {
-  content: '%';
+  content: 'pts';
 }
 
 .finance {
@@ -511,10 +554,61 @@ ul {
 }
 
 /*********************PRIMARY NAV***********************/
+@-webkit-keyframes slideInNav {
+  from {
+    top: -15vh;
+    z-index: 0;
+  }
+  to {
+    top: 0;
+    z-index: 1000;
+  }
+}
+@keyframes slideInNav {
+  from {
+    top: -15vh;
+    z-index: 0;
+  }
+  to {
+    top: 0;
+    z-index: 1000;
+  }
+}
+
+@-webkit-keyframes slideOutNav {
+  from {
+    top: 0;
+    z-index: 1000;
+  }
+  to {
+    top: -15vh;
+    z-index: 0;
+  }
+}
+
+@keyframes slideOutNav {
+  from {
+    top: 0;
+    z-index: 1000;
+  }
+  to {
+    top: -15vh;
+    z-index: 0;
+  }
+}
+
+.inactive-nav {
+  display: none;
+}
+
 .primary-nav {
   height: 15vh;
   position: relative;
-  top: -15vh;
+  z-index: 1000;
+  width: 100%;
+  background: #000;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .links {
@@ -533,6 +627,18 @@ ul {
   margin: 0;
   padding: 0;
   height: inherit;
+}
+
+.link, .primary-close {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  padding: .5rem;
+}
+
+.link:hover, .primary-close:hover {
+  cursor: pointer;
+  background: #fff;
+  color: #000;
 }
 
 /*********************MAIN SCREEN***********************/

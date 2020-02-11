@@ -56,20 +56,60 @@ ul {
 }
 
 /*********************PRIMARY NAV***********************/
+@keyframes slideInNav{
+    from {
+        top: -15vh;
+        z-index: 0;
+    }
+    to {
+        top: 0;
+        z-index: 1000;
+    }
+}
+
+@keyframes slideOutNav {
+    from {
+        top: 0;
+        z-index: 1000;
+    }
+    to {
+        top: -15vh;
+        z-index: 0;
+    }
+}
+
+.inactive-nav {
+    display: none;
+}
+
 .primary-nav {
     height: 15vh;
     position: relative;
-    top: -15vh;
+    // top: -15vh;
+    // top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: #000;
+    font-size: $font-size;
+    font-weight: bold;
 }
 
 .links {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    align-items: center;
+    @include flex(row, nowrap, space-around, center);
     margin: 0;
     padding: 0;
     height: inherit;
+}
+
+.link, .primary-close {
+    transition: $transition-hover;
+    padding: .5rem;
+}
+
+.link:hover, .primary-close:hover {
+    cursor: pointer;
+    background: #fff;
+    color: #000;
 }
 
 

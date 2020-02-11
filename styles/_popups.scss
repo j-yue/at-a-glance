@@ -3,6 +3,7 @@ TABLE OF CONTENTS
 1. shared styles
     a. layout
     b. header
+    c. active popup
 2. weather
 3. calendar
 4. finance + news
@@ -13,6 +14,7 @@ TABLE OF CONTENTS
 
 /*********************SHARED STYLES***********************/
 // LAYOUT
+
 .popup > article {
     height: 100vh;
     width: 100%;
@@ -30,6 +32,7 @@ TABLE OF CONTENTS
     @include center(row, nowrap);
 }
 
+
 .close {
     display: inline-flex;
     align-self: flex-start;
@@ -45,7 +48,7 @@ TABLE OF CONTENTS
 
 .close:hover {
     background: $hover-close-bg;
-    color: $hover-close-main    ;
+    color: $hover-close-main;
 }
 
 .title {
@@ -55,6 +58,32 @@ TABLE OF CONTENTS
     color: #fff;
 }
 
+// ACTIVE POPUP 
+@keyframes slideUp {
+    from {
+        top: 100vh;
+    }
+    to {
+        top: 0;
+    }
+}
+
+
+@keyframes slideDown {
+    from {
+        top: 0;
+    }
+    to {
+        top: 100vh;
+    }
+}
+
+
+.active-popup {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+}
 
 /*********************WEATHER***********************/
 .weather {
@@ -135,7 +164,7 @@ TABLE OF CONTENTS
 }
 
 .changes::after {
-    content: '%';
+    content: 'pts';
 }
 
 // FINANCE

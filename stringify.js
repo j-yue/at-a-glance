@@ -12,7 +12,6 @@ function elementStr(tag, className, data) {
 /**
  * Returns string for a block of html elements
  * @param  {string} starter prepend element(s) to the block
-//  * @param  {string} blockName each element's class follows BEM naming conventions
  * @param  {array} keys array containing keys for desired info in data arg
  * @param  {object} data info from instance of UserData
  * @param  {string} tag element to be created
@@ -21,7 +20,6 @@ function elementStr(tag, className, data) {
 function blockStr(starter, keys, data, tag) {
   let content = starter;
   for (let key of keys) {
-    // content += elementStr(tag, `${blockName}__${key}`, data[key]);
     content += elementStr(tag, key, data[key]);
   }
   return content;

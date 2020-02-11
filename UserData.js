@@ -240,14 +240,20 @@ export default class UserData {
   /**
   * update data
   */
-  refresh() {
-    return Promise.all([this.saveDate(), this.saveNews(), this.saveFinance(), this.saveWeather()]);
-  }
+  // refresh() {
+  //   return Promise.all([this.saveDate(), this.saveNews(), this.saveFinance(), this.saveWeather()]);
+  // }
 
-  async refreshPage(callback) {
-    await this.refresh().then(() => callback());
+  // async refreshPage(callback) {
+  //   await this.refresh().then(() => callback());
+  // }
+
+  async refreshPage() {
+    // await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+    // await this.saveWeather();
+    await Promise.all([this.saveDate(), this.saveWeather(), this.saveNews(), this.saveFinance()]);
+    // console.log(this);
   }
-  
 
 
   /**

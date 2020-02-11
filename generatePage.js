@@ -100,14 +100,15 @@ document.onreadystatechange = () => {
 
 
     document.querySelector('.location-btn').addEventListener('click', () => {
+      console.log(user.location.coordinates);
       if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(async position => {
           let [lat, lon] = [position.coords.latitude, position.coords.longitude];
+          await user.reverseGeocode(lat, lon);
           document.querySelector('#map > div').remove();
-          await user.reverseGeocode(lat, lon).then(() => updateLocation(user.location));
+          updateLocation(user.location);
         });
       }
-      console.log(user.location);
     });
 
   }

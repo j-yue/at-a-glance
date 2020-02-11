@@ -101,9 +101,6 @@ const header = (headerName, name) => {
   return block;
 }
 
-/***************************************************
- * WIDGETS
- * ********************************************** */
 // WEATHER
 /***
  * Create the weather popup
@@ -307,10 +304,8 @@ export const createPage = (user) => {
   //widgets
   weatherWidget(user.weather);
   calendarWidget(user.calendar);
-  financeWidget(user.finance.crypto[0]);
-  newsWidget(user.news.national);
+  newsWidget(user.news.national[0]);
   financeWidget(user.finance.indexes[0]);
-  newsWidget(user.news.world[0]);
 
   //popups
   weather(user.weather, user.location.city);

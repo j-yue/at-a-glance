@@ -16,8 +16,9 @@
 
 import UserData from './UserData.js';
 import { DEFAULT_DATA } from './defaultData.js';
+import {us, china, germany} from './demo.js';
 // import {elementStr, blockStr, findIcon} from './stringify.js';
-import { createPage, updateLocation } from './createPage.js';
+import { createPage, updateLocation, updatePage } from './createPage.js';
 import { viewPopup, closePopup, viewNewsTab, viewFinanceTab } from './eventHandlers.js';
 // import * from './eventHandlers';
 // let user;
@@ -26,7 +27,9 @@ import { viewPopup, closePopup, viewNewsTab, viewFinanceTab } from './eventHandl
 
 document.onreadystatechange = () => {
   let state = document.readyState;
-  let user = new UserData(DEFAULT_DATA);
+  // let user = new UserData(DEFAULT_DATA);
+  let user = new UserData(china);
+  console.log(user);
 
   if (state === 'loading') {
 
@@ -36,8 +39,9 @@ document.onreadystatechange = () => {
 
   }
   else if (state === 'complete') {
-
+    let blankState = document.body.innerHTML;
     createPage(user);
+    // console.log(user);
 
     /**************************************EVENT LISTENERS*******************************************/
 
@@ -63,6 +67,19 @@ document.onreadystatechange = () => {
       document.querySelector('.inactive-nav').classList.remove('inactive-nav');
     });
 
+    //refresh page
+    document.querySelector('.refresh').addEventListener('click', async () => {
+      await user.refreshPage();
+      updatePage(blankState, user);
+      // document.body.innerHTML = blankState;
+
+      console.log(user);
+      // document = scaffold;
+      // createPage(user);
+      // updatePage(user);
+      // console.log(document.body.innerHTML);
+      // console.log(blankState);
+    })
 
 
     // WIDGETS------------------------------------------------------------------------------------
@@ -95,8 +112,8 @@ document.onreadystatechange = () => {
     });
 
     // make world headlines the default active news tab
-    document.querySelector('.world-headlines').classList.add('active-headlines');
-    document.querySelector('.world').classList.add('active-news-tab');
+    document.querySelector('.national-headlines').classList.add('active-headlines');
+    document.querySelector('.national').classList.add('active-news-tab');
 
 
     document.querySelector('.location-btn').addEventListener('click', () => {
@@ -104,9 +121,10 @@ document.onreadystatechange = () => {
       if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(async position => {
           let [lat, lon] = [position.coords.latitude, position.coords.longitude];
-          await user.reverseGeocode(lat, lon);
+          await user.reverseGeocode(lat, lon).then(res => console.log(res));
           document.querySelector('#map > div').remove();
           updateLocation(user.location);
+          // console.log(user.location);
         });
       }
     });

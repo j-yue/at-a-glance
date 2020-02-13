@@ -324,41 +324,10 @@ export const createPage = (user) => {
  * @param {string} prevState innerHTML of body before createPage was called to remove old information
  * @param {UserData} user UserData instance with updated information
  */
-// export const updatePage = (prevState, user) => {
-//   document.body.innerHTML = prevState;
-//   document.querySelector('.finance-widget .price').innerText = user.finance.indexes[0].price;
-//   // console.log(user.indexes[0].price);
-//   // let price = document.querySelector('.finance-widget .price')
-//   // createPage(user);
-//   // financeWidget(user.finance.indexes[0]);
-//   // console.log(user);
-//   // financeWidget(user.finance.indexes);
-// }
-
 export const updatePage = (prevState, user) => {
-  // document.body.innerHTML = prevState;
-  document.querySelector('main').innerHTML = prevState;
+  document.querySelector('body').innerHTML = prevState;
   createPage(user);
   addEverything();
-  // finance(user.finance);
-  // console.log(user.finance.indexes[0]);
-  // financeWidget(user.finance.indexes[0]);
-  // finance(user.finance);
-  // let data = user.finance;
-  // let content = '';
-  // for (let type in data) {
-  //   data[type].map(item => {
-  //     let info = blockStr('', ['ticker', 'price', 'changes'], item, 'div');
-  //     let _content = elementStr('article', type, info);
-  //     content += _content;
-  //   });
-  //   document.querySelector(`.${type}-info`).innerHTML = content;
-  //   content = '';
-  // }
-  // let node = document.querySelector('.finance-popup');
-  // node.innerHTML = header('header', 'Finance') + node.innerHTML;
-  // let finance = user.finance;
-  
 }
 
 /***

@@ -42,7 +42,8 @@ export const addEverything = (user, prevState) => {
     document.querySelector('.refresh').addEventListener('click', async () => {
         // console.log('start');
         console.log(user);
-        await user.saveNews();
+        // await user.saveNews();
+        await user.update();
         updatePage(prevState, user);
         // console.log(prevState);
         // return user;

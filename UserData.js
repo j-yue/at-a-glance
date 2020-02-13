@@ -244,30 +244,12 @@ export default class UserData {
     this.setProperty('weather', this.parseWeather(data, unit));
   }
 
-
-  /**
-  * update data
-  */
-  // refresh() {
-  //   return Promise.all([this.saveDate(), this.saveNews(), this.saveFinance(), this.saveWeather()]);
-  // }
-
-  // async refreshPage(callback) {
-  //   await this.refresh().then(() => callback());
-  // }
-
-  // async refreshPage() {
-  //   // await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
-  //   // await this.saveWeather();
-  //   await Promise.all([this.saveDate(), this.saveWeather(), this.saveNews(), this.saveFinance()]);
-  //   // console.log(this);
-  // }
-
-  async refreshPage() {
-    let result = await this.updateIndexes();
-    // console.log(result);
-    // document.querySelector('.finance-widget .price').innerText = result.indexes[0].price;
-    return result;
+  /***
+   * fetch new information on weather, news, date, and finance
+   */
+  async update() {
+    await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+    console.log(this);
   }
 
 

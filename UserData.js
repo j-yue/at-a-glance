@@ -1,4 +1,4 @@
-import {WEATHER_KEY, WORLD_URL, INDEX_URL, CRYPTO_URL, GEOCODE_KEY, CALENDAR_KEY} from './urls.js';
+import { WEATHER_KEY, WORLD_URL, INDEX_URL, CRYPTO_URL, GEOCODE_KEY, CALENDAR_KEY } from './urls.js';
 
 //for debugging
 const ALL_PROPERTIES = ['location', 'news', 'finance', 'weather', 'calendar'];
@@ -16,16 +16,16 @@ const FAHRENHEIT_COUNTRIES = ['us', 'bs', 'mh', 'ky', 'pw', 'fm', 'lr'];
 
 export default class UserData {
 
-/**
- * Data representation of the web app
- * @constructor
- * @param {obj} location user's location (coordinates, city, and country code)
- * @param {obj} news national, global, and business news specific to user's location
- * @param {obj} finance data on us indexes and cryptocurrencies
- * @param {obj} weather user's local weather
- * @param {obj} calendar calendar with country specific holidays
- */
-  constructor({location, news, finance, weather, calendar}) {
+  /**
+   * Data representation of the web app
+   * @constructor
+   * @param {obj} location user's location (coordinates, city, and country code)
+   * @param {obj} news national, global, and business news specific to user's location
+   * @param {obj} finance data on us indexes and cryptocurrencies
+   * @param {obj} weather user's local weather
+   * @param {obj} calendar calendar with country specific holidays
+   */
+  constructor({ location, news, finance, weather, calendar }) {
     this.location = location;
     this.news = news;
     this.finance = finance;
@@ -48,8 +48,13 @@ export default class UserData {
    * @param  {string} url
    * @return {promise} promise to return text in JSON once resolved
    */
-  callApi(url) {
-    return fetch(url).then(res => res.json());
+  // callApi(url) {
+  //   return fetch(url).then(res => res.json());
+  // }
+
+  async callApi(url) {
+    let result = await fetch(url);
+    return result.json();
   }
 
   /**
@@ -63,9 +68,9 @@ export default class UserData {
     try {
       let location = await this.callApi(geocodeURL).then(res => res.results[0].components);
       let [city, cc] = [location.city, location.country_code];
-      this.setProperty('location', {coordinates: [lat, lon], cc, city});
+      this.setProperty('location', { coordinates: [lat, lon], cc, city });
       return [city, cc];
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
   }
@@ -93,12 +98,12 @@ export default class UserData {
     let monthStart = new Date(year, month, 1).getDay();
     let monthEnd = new Date(year, month + 1, 0).getDate();
     let cc = this.getProperty('location').cc;
-    const calendarURL = `https://calendarific.com/api/v2/holidays?&api_key=${CALENDAR_KEY}&country=${cc}&year=${year}&month=${month+1}&type=national`;
+    const calendarURL = `https://calendarific.com/api/v2/holidays?&api_key=${CALENDAR_KEY}&country=${cc}&year=${year}&month=${month + 1}&type=national`;
     try {
       let result = await this.callApi(calendarURL).then(res => Object.values(res.response.holidays));
       let holidays = [];
       result.map(holiday => {
-        let obj = {name: holiday.name, day: holiday.date.datetime.day};
+        let obj = { name: holiday.name, day: holiday.date.datetime.day };
         holidays.push(obj);
       });
       let calendar = {
@@ -138,36 +143,36 @@ export default class UserData {
   * national news (country-specific)
   * business news (country-specific)
   */
-  saveNews() {
-    let news = {};
+  async saveNews() {
+    // let news = {};
     let cc = this.getProperty('location').cc;
 
     if (!SUPPORTED_CC.includes(cc)) cc = 'us';
     // console.log(cc);
     const urls = {
-        national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
-        business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
-        world: WORLD_URL
+      national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
+      business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
+      world: WORLD_URL
     };
-    console.log(urls.national);
-    Object.keys(urls).map(async key => {
-      try {
-        let data = await this.callApi(urls[key]).then(res => this.saveHeadlines(urls[key].includes('nytimes'), res, 10));
-        news[key] = data;
-      } catch(err) {
-        console.log(err);
-      }
+    let promises = Object.keys(urls).map(async key => {
+      let temp = {};
+      let data = await this.callApi(urls[key]);
+      let headlines = this.saveHeadlines(urls[key].includes('nytimes'), data, 10);
+      temp[`${key}`] = headlines;
+      return temp;
     });
-    this.setProperty('news', news);
-   }
 
-   /**
-   * helper for saveFinance()
-   * @param {boolean} isIndex
-   * @param {obj} data
-   * @return arr of obj containing the security's name, price, and price
-    changes and prepends '$' to price
-   */
+    let result = await Promise.all(promises);
+    let merge = Object.assign(result[0], result[1], result[2]);
+    this.setProperty('news', merge);
+  }
+
+  /**
+  * helper for saveFinance()
+  * @param {boolean} isIndex
+  * @param {obj} data
+  * @return arr of obj containing the security's name, price, and price changes and prepends '$' to price
+  */
   saveTicker(isIndex, data) {
     let result = [];
     let key = (isIndex) ? 'majorIndexesList' : 'cryptocurrenciesList';
@@ -187,21 +192,24 @@ export default class UserData {
   /**
   * save current info on us indexes and the top 10 cryptocurrencies
   */
-  saveFinance() {
-    let finance = {};
+  async saveFinance() {
     const urls = {
-      indexes: INDEX_URL,
-      crypto: CRYPTO_URL
+      "indexes": INDEX_URL,
+      "crypto": CRYPTO_URL
     };
-
-    Object.keys(urls).map(async key => {
-      try {
-        let data = await this.callApi(urls[key]).then(res => this.saveTicker(key.includes('index'), res)).then(result => finance[`${key}`] = result);
-        finance[key] = data;
-      } catch (err) {
-        console.log(err);
-      }
+    let finance = {
+      "indexes": '',
+      "crypto": ''
+    };
+    let promises = Object.keys(urls).map(async key => {
+      let response = await this.callApi(urls[`${key}`]);
+      let details = this.saveTicker(key.includes('index'), response);
+      return details;
     });
+
+    let result = await Promise.all(promises);
+    finance.indexes = result[0];
+    finance.crypto = result[1];
     this.setProperty('finance', finance);
   }
 
@@ -248,11 +256,18 @@ export default class UserData {
   //   await this.refresh().then(() => callback());
   // }
 
+  // async refreshPage() {
+  //   // await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+  //   // await this.saveWeather();
+  //   await Promise.all([this.saveDate(), this.saveWeather(), this.saveNews(), this.saveFinance()]);
+  //   // console.log(this);
+  // }
+
   async refreshPage() {
-    // await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
-    // await this.saveWeather();
-    await Promise.all([this.saveDate(), this.saveWeather(), this.saveNews(), this.saveFinance()]);
-    // console.log(this);
+    let result = await this.updateIndexes();
+    // console.log(result);
+    // document.querySelector('.finance-widget .price').innerText = result.indexes[0].price;
+    return result;
   }
 
 

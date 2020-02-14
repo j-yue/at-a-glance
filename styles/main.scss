@@ -7,6 +7,7 @@ TABLE OF CONTENTS
 5. main screen
     a. main header
     b. widgets
+    c. update failed
 */
 
 /*********************IMPORTS***********************/
@@ -85,8 +86,6 @@ ul {
 .primary-nav {
     height: 15vh;
     position: relative;
-    // top: -15vh;
-    // top: 0;
     z-index: 1000;
     width: 100%;
     background: #000;
@@ -207,3 +206,31 @@ $screen-fonts: (
 }
 
 
+// UPDATE FAILED
+.update-failed {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    background: red;
+    position: absolute;
+    top: 0;
+    z-index: 20000;
+    @include flex(column, nowrap, center, center);
+    font-size: 3rem;
+}
+
+.update-failed button {
+    border: none;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.update-failed button:hover {
+    transition: $transition-hover;
+    background: #000;
+    color: inherit;
+}
+.update-failed.inactive {
+   display: none;
+}

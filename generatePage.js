@@ -31,6 +31,7 @@ document.onreadystatechange = () => {
     window.prevState = blankState; 
     createPage(user);
     addEverything();
+    console.log(user);
 
   }
 }

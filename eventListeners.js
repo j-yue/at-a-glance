@@ -11,7 +11,7 @@
  */
 
 import { viewPopup, closePopup, viewNewsTab, viewFinanceTab } from './eventHandlers.js';
-import { createPage, updateLocation, updatePage } from './createPage.js';
+import { updateLocation, updatePage } from './createPage.js';
 
 
 export const addEverything = () => {
@@ -40,10 +40,14 @@ export const addEverything = () => {
 
     //refresh page
     document.querySelector('.refresh').addEventListener('click', async () => {
-        if (user === undefined) {
-            user = window.user;
-        }
-        await user.update(); 
+        if (user === undefined) user = window.user;
+        await user.update();
+        updatePage(window.prevState, user);
+    });
+
+    document.querySelector('.refresh-error').addEventListener('click', async () => {
+        if (user === undefined) user = window.user;
+        await user.update();
         updatePage(window.prevState, user);
     });
 
@@ -81,18 +85,20 @@ export const addEverything = () => {
     document.querySelector('.national-headlines').classList.add('active-headlines');
     document.querySelector('.national').classList.add('active-news-tab');
 
-
-    document.querySelector('.location-btn').addEventListener('click', () => {
-        // console.log(user.location.coordinates);
+    // update location when location button clicked
+    document.querySelector('.location-btn').addEventListener('click', (e) => {
         let user = window.user;
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(async position => {
-                let [lat, lon] = [position.coords.latitude, position.coords.longitude];
-                await user.reverseGeocode(lat, lon).then(res => console.log(res));
-                document.querySelector('#map > div').remove();
-                updateLocation(user.location);
-                // console.log(user.location);
-            });
+        document.querySelector('.location-error').innerText = '';
+        try {
+            user.saveCoords(
+                () => {
+                    document.querySelector('.location-error').innerText = 'Please enable location services';
+                }
+            );
+            document.querySelector('#map > div').remove();
+            updateLocation(user.location);
+        } catch (err) {
+            document.querySelector('.location-error').innerText = 'Location services unsupported in browser.';
         }
     });
 }

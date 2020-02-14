@@ -194,6 +194,68 @@ export const us = {
     }
 }
 
+export const fetchFailed = {
+    location: {
+        coordinates: [
+            '',
+            ''
+        ],
+        cc: 'Unable to find country',
+        city: 'Unable to find city'
+    },
+    news: {
+        world: [
+            'Unable to get world headlines'
+        ],
+        national: [
+            'Unable to get national headlines'
+        ],
+        business: [
+            'Unable to get business headlines'
+        ]
+    },
+    finance: {
+        crypto: [
+            {
+                name: 'Failed to get name',
+                price: 'Failed to get price',
+                changes: 'Failed to get changes',
+                ticker: 'Failed to get ticker'
+            }
+        ],
+        indexes: [
+            {
+                name: 'Failed to get name',
+                price: 'Failed to get price',
+                changes: 'Failed to get changes',
+                ticker: 'Failed to get ticker'
+            }
+        ]
+        
+    },
+    weather: {
+        type: 'Failed to get weather type',
+        description: 'Failed to get weather description',
+        icon: 'Failed to get weather icon',
+        current: 'Failed to get current temp',
+        high: 'Failed to get daily high',
+        low: 'Failed to get daily low'
+    },
+    calendar: {
+        date: 'Unable to get date',
+        day: 'Unable to get day of the week',
+        month: 'Unable to get month',
+        holidays: [
+            {
+                name: 'Failed to get holidays',
+                day: 1
+            }
+        ],
+        monthStart: 'Unable to get month start',
+        monthEnd: 'Unable to get month end'
+    }
+}
+
 export const china = {
     "location": {
         "coordinates": [

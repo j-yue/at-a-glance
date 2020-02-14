@@ -1,4 +1,5 @@
 import { WEATHER_KEY, WORLD_URL, INDEX_URL, CRYPTO_URL, GEOCODE_KEY, CALENDAR_KEY } from './urls.js';
+import { fetchFailed } from './demo.js';
 
 //for debugging
 const ALL_PROPERTIES = ['location', 'news', 'finance', 'weather', 'calendar'];
@@ -13,6 +14,8 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 // country codes for Fahrenheit only countries
 const FAHRENHEIT_COUNTRIES = ['us', 'bs', 'mh', 'ky', 'pw', 'fm', 'lr'];
 
+// error msg node
+const error = document.querySelector('.update-failed');
 
 export default class UserData {
 
@@ -48,10 +51,6 @@ export default class UserData {
    * @param  {string} url
    * @return {promise} promise to return text in JSON once resolved
    */
-  // callApi(url) {
-  //   return fetch(url).then(res => res.json());
-  // }
-
   async callApi(url) {
     let result = await fetch(url);
     return result.json();
@@ -64,27 +63,26 @@ export default class UserData {
    */
   async reverseGeocode(lat, lon) {
     const geocodeURL = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${GEOCODE_KEY}`;
-    // let location = await fetch(geocodeURL).then(response => response.json()).then(data => data.results[0].components);
     try {
       let location = await this.callApi(geocodeURL).then(res => res.results[0].components);
       let [city, cc] = [location.city, location.country_code];
       this.setProperty('location', { coordinates: [lat, lon], cc, city });
-      return [city, cc];
     } catch (err) {
-      console.log(err);
+      this.setProperty('location', fetchFailed.location);
+      error.classList.remove('inactive');
     }
   }
 
   /**
    *  Get's the user's coordinates and saves location details
+   * @param {func} errorFnc callback if geolocation fails
    */
-  saveCoords() {
+  saveCoords(errorFnc) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log('saving location');
         let [lat, lon] = [position.coords.latitude, position.coords.longitude];
         this.reverseGeocode(lat, lon);
-      }, () => console.log("unable to get location, defaulting to los angeles")); //should add default location
+      }, () => errorFnc());
     }
   }
 
@@ -116,7 +114,8 @@ export default class UserData {
       }
       this.setProperty('calendar', calendar);
     } catch (err) {
-      console.log('unable to get holidays, will produce plain calendar');
+      this.setProperty('calendar', fetchFailed.calendar);
+      error.classList.remove('inactive');
     }
   }
 
@@ -145,24 +144,27 @@ export default class UserData {
   */
   async saveNews() {
     let cc = this.getProperty('location').cc;
-
     if (!SUPPORTED_CC.includes(cc)) cc = 'us';
     const urls = {
       national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
       business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
       world: WORLD_URL
     };
-    let promises = Object.keys(urls).map(async key => {
-      let temp = {};
-      let data = await this.callApi(urls[key]);
-      let headlines = this.saveHeadlines(urls[key].includes('nytimes'), data, 10);
-      temp[`${key}`] = headlines;
-      return temp;
-    });
-
-    let result = await Promise.all(promises);
-    let merge = Object.assign(result[0], result[1], result[2]);
-    this.setProperty('news', merge);
+    try {
+      let promises = Object.keys(urls).map(async key => {
+        let temp = {};
+        let data = await this.callApi(urls[key]);
+        let headlines = this.saveHeadlines(urls[key].includes('nytimes'), data, 10);
+        temp[`${key}`] = headlines;
+        return temp;
+      });
+      let result = await Promise.all(promises);
+      let merge = Object.assign(result[0], result[1], result[2]);
+      this.setProperty('news', merge);
+    } catch (err) {
+      this.setProperty('news', fetchFailed.news);
+      error.classList.remove('inactive');
+    }
   }
 
   /**
@@ -199,16 +201,21 @@ export default class UserData {
       "indexes": '',
       "crypto": ''
     };
-    let promises = Object.keys(urls).map(async key => {
-      let response = await this.callApi(urls[`${key}`]);
-      let details = this.saveTicker(key.includes('index'), response);
-      return details;
-    });
+    try {
+      let promises = Object.keys(urls).map(async key => {
+        let response = await this.callApi(urls[`${key}`]);
+        let details = this.saveTicker(key.includes('index'), response);
+        return details;
+      });
 
-    let result = await Promise.all(promises);
-    finance.indexes = result[0];
-    finance.crypto = result[1];
-    this.setProperty('finance', finance);
+      let result = await Promise.all(promises);
+      finance.indexes = result[0];
+      finance.crypto = result[1];
+      this.setProperty('finance', finance);
+    } catch (err) {
+      this.setProperty('finance', fetchFailed.finance);
+      error.classList.remove('inactive');
+    }
   }
 
   /**
@@ -237,19 +244,47 @@ export default class UserData {
     let [lat, lon, cc] = [location.coordinates[0], location.coordinates[1], location.cc];
     let units = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'imperial' : 'metric';
     const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${WEATHER_KEY}`;
-    let data = await this.callApi(weatherURL);
-    let unit = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'F' : 'C';
-    this.setProperty('weather', this.parseWeather(data, unit));
+    try {
+      let data = await this.callApi(weatherURL);
+      let unit = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'F' : 'C';
+      this.setProperty('weather', this.parseWeather(data, unit));
+    } catch (err) {
+      this.setProperty('weather', fetchFailed.weather);
+      error.classList.remove('inactive');
+    }
   }
 
   /***
-   * fetch new information on weather, news, date, and finance
+   * fetch new information on weather, news, date, and finance 
+   * show error message if promises fail
    */
   async update() {
-    await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
-    this.storeLocation();
+    error.classList.add('inactive');
+    try {
+
+
+      await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+    } catch (err) {
+      console.log('something happened');
+    }
   }
 
+
+  /***
+   * save only the user's coordinates to local storage
+   * this will be used to check if the user is new
+   * when page loads, it will check for this and update
+   */
+  storeCoords() {
+    let coords = this.location.coordinates;
+    let location = {
+      lat: coords[0],
+      lon: coords[1]
+    };
+    for (let key in location) {
+      localStorage.setItem(key, JSON.stringify(location[key]));
+    }
+  }
 
   /**
   * save only the user's location property to local local storage

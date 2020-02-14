@@ -13,7 +13,7 @@
  */
 
 import { elementStr, blockStr, findIcon } from './stringify.js';
-import {addEverything} from './eventListeners.js';
+import { addEverything } from './eventListeners.js';
 import UserData from './UserData.js';
 
 
@@ -320,15 +320,18 @@ export const createPage = (user) => {
 
 /***
  * Called when user refreshes the page
- * Update the page with new info 
+ * Update the page with new info as long as the error message is not active
  * @param {string} prevState innerHTML of body before createPage was called to remove old information
  * @param {UserData} user UserData instance with updated information
  */
 export const updatePage = (prevState, user) => {
-  document.querySelector('body').innerHTML = prevState;
-  createPage(user);
-  addEverything();
-  console.log(window.user);
+  //don't update page if update failed
+  let isErrorActive = document.querySelector('.update-failed').classList.length === 1;
+  if (!isErrorActive) {
+    document.querySelector('body').innerHTML = prevState;
+    createPage(user);
+    addEverything();
+  }
 }
 
 /***

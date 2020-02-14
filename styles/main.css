@@ -7,6 +7,7 @@ TABLE OF CONTENTS
 5. main screen
     a. main header
     b. widgets
+    c. update failed
 */
 /*********************IMPORTS***********************/
 /**
@@ -254,7 +255,7 @@ TABLE OF CONTENTS
 }
 
 .changes::after {
-  content: 'pts';
+  content: ' pts';
 }
 
 .finance {
@@ -778,5 +779,47 @@ ul {
 
 .main-screen .date, .main-screen .price {
   font-size: 3rem;
+}
+
+.update-failed {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  background: red;
+  position: absolute;
+  top: 0;
+  z-index: 20000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 3rem;
+}
+
+.update-failed button {
+  border: none;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.update-failed button:hover {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  background: #000;
+  color: inherit;
+}
+
+.update-failed.inactive {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */

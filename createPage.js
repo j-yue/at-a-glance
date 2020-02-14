@@ -328,6 +328,7 @@ export const updatePage = (prevState, user) => {
   document.querySelector('body').innerHTML = prevState;
   createPage(user);
   addEverything();
+  console.log(window.user);
 }
 
 /***

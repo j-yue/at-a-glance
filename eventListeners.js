@@ -14,7 +14,7 @@ import { viewPopup, closePopup, viewNewsTab, viewFinanceTab } from './eventHandl
 import { createPage, updateLocation, updatePage } from './createPage.js';
 
 
-export const addEverything = (user, prevState) => {
+export const addEverything = () => {
 
     // PRIMARY NAV------------------------------------------------------------------------------------
     // slide primary nav out of view when user closes it
@@ -40,13 +40,11 @@ export const addEverything = (user, prevState) => {
 
     //refresh page
     document.querySelector('.refresh').addEventListener('click', async () => {
-        // console.log('start');
-        console.log(user);
-        // await user.saveNews();
-        await user.update();
-        updatePage(prevState, user);
-        // console.log(prevState);
-        // return user;
+        if (user === undefined) {
+            user = window.user;
+        }
+        await user.update(); 
+        updatePage(window.prevState, user);
     });
 
 
@@ -85,7 +83,8 @@ export const addEverything = (user, prevState) => {
 
 
     document.querySelector('.location-btn').addEventListener('click', () => {
-        console.log(user.location.coordinates);
+        // console.log(user.location.coordinates);
+        let user = window.user;
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(async position => {
                 let [lat, lon] = [position.coords.latitude, position.coords.longitude];

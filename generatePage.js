@@ -1,35 +1,22 @@
 /***
  * Render page with user's data from local storage. If user is new, load demo data.
  * 
- * TABLE OF CONTENTS  
-  1. loading
-  2. interactive
-  3. complete
-    a. createPage
-    b. event listeners
-      1. primary nav
-      2. main header
-      3. widgets
-      4. popups + actions
+ * global variables:
+ *  user - instance of UserData 
+ *  prevState - state of page before createPage() called
 
  */
 
 import UserData from './UserData.js';
-import { DEFAULT_DATA } from './defaultData.js';
-import {us, china, germany} from './demo.js';
+import { us, china, germany } from './demo.js';
 import { createPage, updateLocation, updatePage } from './createPage.js';
-import {addEverything} from './eventListeners.js';
-// import * from './eventHandlers';
-// let user;
+import { addEverything } from './eventListeners.js';
 // let lastSession = localStorage.getItem('lastSession');
-
 
 document.onreadystatechange = () => {
   let state = document.readyState;
-  // let user = new UserData(DEFAULT_DATA);
-  let user = new UserData(china);
-  let backup = user;
-  console.log(user);
+  window.user = new UserData(china);
+  var user = window.user;
 
   if (state === 'loading') {
 
@@ -38,17 +25,12 @@ document.onreadystatechange = () => {
   else if (state === 'interactive') {
 
   }
+
   else if (state === 'complete') {
     let blankState = document.body.innerHTML;
-    let mainContent = document.querySelector('main').innerHTML;
-    createPage(user); 
-    addEverything(user, mainContent);
-    //so for some reason user becomes undefined, so redefine it???
-    
-    // const mainContent = document.querySelector('main').innerHTML;
-    // createPage(user);
-    // console.log(user);
-
+    window.prevState = blankState; 
+    createPage(user);
+    addEverything();
 
   }
 }

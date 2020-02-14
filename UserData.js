@@ -144,11 +144,9 @@ export default class UserData {
   * business news (country-specific)
   */
   async saveNews() {
-    // let news = {};
     let cc = this.getProperty('location').cc;
 
     if (!SUPPORTED_CC.includes(cc)) cc = 'us';
-    // console.log(cc);
     const urls = {
       national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
       business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
@@ -249,7 +247,7 @@ export default class UserData {
    */
   async update() {
     await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
-    console.log(this);
+    this.storeLocation();
   }
 
 

@@ -43,7 +43,8 @@ function findIcon(condition) {
     case '03d':
       icon = 'PARTLY_CLOUDY_DAY';
       break;
-    case '02n' || '03n':
+    case '02n':
+    case '03n':
       icon = 'PARTLY_CLOUDY_NIGHT';
       break;
     case '04d':

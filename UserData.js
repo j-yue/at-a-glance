@@ -1,4 +1,5 @@
-import {WEATHER_KEY, WORLD_URL, INDEX_URL, CRYPTO_URL, GEOCODE_KEY, CALENDAR_KEY} from './urls.js';
+import { WEATHER_KEY, WORLD_URL, INDEX_URL, CRYPTO_URL, GEOCODE_KEY, CALENDAR_KEY } from './urls.js';
+import { fetchFailed } from './demo.js';
 
 //for debugging
 const ALL_PROPERTIES = ['location', 'news', 'finance', 'weather', 'calendar'];
@@ -13,19 +14,21 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 // country codes for Fahrenheit only countries
 const FAHRENHEIT_COUNTRIES = ['us', 'bs', 'mh', 'ky', 'pw', 'fm', 'lr'];
 
+// error msg node
+const error = document.querySelector('.update-failed');
 
 export default class UserData {
 
-/**
- * Data representation of the web app
- * @constructor
- * @param {obj} location user's location (coordinates, city, and country code)
- * @param {obj} news national, global, and business news specific to user's location
- * @param {obj} finance data on us indexes and cryptocurrencies
- * @param {obj} weather user's local weather
- * @param {obj} calendar calendar with country specific holidays
- */
-  constructor({location, news, finance, weather, calendar}) {
+  /**
+   * Data representation of the web app
+   * @constructor
+   * @param {obj} location user's location (coordinates, city, and country code)
+   * @param {obj} news national, global, and business news specific to user's location
+   * @param {obj} finance data on us indexes and cryptocurrencies
+   * @param {obj} weather user's local weather
+   * @param {obj} calendar calendar with country specific holidays
+   */
+  constructor({ location, news, finance, weather, calendar }) {
     this.location = location;
     this.news = news;
     this.finance = finance;
@@ -48,8 +51,9 @@ export default class UserData {
    * @param  {string} url
    * @return {promise} promise to return text in JSON once resolved
    */
-  callApi(url) {
-    return fetch(url).then(res => res.json());
+  async callApi(url) {
+    let result = await fetch(url);
+    return result.json();
   }
 
   /**
@@ -59,27 +63,26 @@ export default class UserData {
    */
   async reverseGeocode(lat, lon) {
     const geocodeURL = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${GEOCODE_KEY}`;
-    // let location = await fetch(geocodeURL).then(response => response.json()).then(data => data.results[0].components);
     try {
       let location = await this.callApi(geocodeURL).then(res => res.results[0].components);
       let [city, cc] = [location.city, location.country_code];
-      this.setProperty('location', {coordinates: [lat, lon], cc, city});
-      return [city, cc];
-    } catch(err) {
-      console.log(err);
+      this.setProperty('location', { coordinates: [lat, lon], cc, city });
+    } catch (err) {
+      this.setProperty('location', fetchFailed.location);
+      error.classList.remove('inactive');
     }
   }
 
   /**
    *  Get's the user's coordinates and saves location details
+   * @param {func} errorFnc callback if geolocation fails
    */
-  saveCoords() {
+  saveCoords(errorFnc) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
-        console.log('saving location');
         let [lat, lon] = [position.coords.latitude, position.coords.longitude];
         this.reverseGeocode(lat, lon);
-      }, () => console.log("unable to get location, defaulting to los angeles")); //should add default location
+      }, () => errorFnc());
     }
   }
 
@@ -93,12 +96,12 @@ export default class UserData {
     let monthStart = new Date(year, month, 1).getDay();
     let monthEnd = new Date(year, month + 1, 0).getDate();
     let cc = this.getProperty('location').cc;
-    const calendarURL = `https://calendarific.com/api/v2/holidays?&api_key=${CALENDAR_KEY}&country=${cc}&year=${year}&month=${month+1}&type=national`;
+    const calendarURL = `https://calendarific.com/api/v2/holidays?&api_key=${CALENDAR_KEY}&country=${cc}&year=${year}&month=${month + 1}&type=national`;
     try {
       let result = await this.callApi(calendarURL).then(res => Object.values(res.response.holidays));
       let holidays = [];
       result.map(holiday => {
-        let obj = {name: holiday.name, day: holiday.date.datetime.day};
+        let obj = { name: holiday.name, day: holiday.date.datetime.day };
         holidays.push(obj);
       });
       let calendar = {
@@ -111,7 +114,8 @@ export default class UserData {
       }
       this.setProperty('calendar', calendar);
     } catch (err) {
-      console.log('unable to get holidays, will produce plain calendar');
+      this.setProperty('calendar', fetchFailed.calendar);
+      error.classList.remove('inactive');
     }
   }
 
@@ -138,36 +142,37 @@ export default class UserData {
   * national news (country-specific)
   * business news (country-specific)
   */
-  saveNews() {
-    let news = {};
+  async saveNews() {
     let cc = this.getProperty('location').cc;
-
     if (!SUPPORTED_CC.includes(cc)) cc = 'us';
-    // console.log(cc);
     const urls = {
-        national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
-        business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
-        world: WORLD_URL
+      national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
+      business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
+      world: WORLD_URL
     };
-    console.log(urls.national);
-    Object.keys(urls).map(async key => {
-      try {
-        let data = await this.callApi(urls[key]).then(res => this.saveHeadlines(urls[key].includes('nytimes'), res, 10));
-        news[key] = data;
-      } catch(err) {
-        console.log(err);
-      }
-    });
-    this.setProperty('news', news);
-   }
+    try {
+      let promises = Object.keys(urls).map(async key => {
+        let temp = {};
+        let data = await this.callApi(urls[key]);
+        let headlines = this.saveHeadlines(urls[key].includes('nytimes'), data, 10);
+        temp[`${key}`] = headlines;
+        return temp;
+      });
+      let result = await Promise.all(promises);
+      let merge = Object.assign(result[0], result[1], result[2]);
+      this.setProperty('news', merge);
+    } catch (err) {
+      this.setProperty('news', fetchFailed.news);
+      error.classList.remove('inactive');
+    }
+  }
 
-   /**
-   * helper for saveFinance()
-   * @param {boolean} isIndex
-   * @param {obj} data
-   * @return arr of obj containing the security's name, price, and price
-    changes and prepends '$' to price
-   */
+  /**
+  * helper for saveFinance()
+  * @param {boolean} isIndex
+  * @param {obj} data
+  * @return arr of obj containing the security's name, price, and price changes and prepends '$' to price
+  */
   saveTicker(isIndex, data) {
     let result = [];
     let key = (isIndex) ? 'majorIndexesList' : 'cryptocurrenciesList';
@@ -187,22 +192,30 @@ export default class UserData {
   /**
   * save current info on us indexes and the top 10 cryptocurrencies
   */
-  saveFinance() {
-    let finance = {};
+  async saveFinance() {
     const urls = {
-      indexes: INDEX_URL,
-      crypto: CRYPTO_URL
+      "indexes": INDEX_URL,
+      "crypto": CRYPTO_URL
     };
+    let finance = {
+      "indexes": '',
+      "crypto": ''
+    };
+    try {
+      let promises = Object.keys(urls).map(async key => {
+        let response = await this.callApi(urls[`${key}`]);
+        let details = this.saveTicker(key.includes('index'), response);
+        return details;
+      });
 
-    Object.keys(urls).map(async key => {
-      try {
-        let data = await this.callApi(urls[key]).then(res => this.saveTicker(key.includes('index'), res)).then(result => finance[`${key}`] = result);
-        finance[key] = data;
-      } catch (err) {
-        console.log(err);
-      }
-    });
-    this.setProperty('finance', finance);
+      let result = await Promise.all(promises);
+      finance.indexes = result[0];
+      finance.crypto = result[1];
+      this.setProperty('finance', finance);
+    } catch (err) {
+      this.setProperty('finance', fetchFailed.finance);
+      error.classList.remove('inactive');
+    }
   }
 
   /**
@@ -231,37 +244,42 @@ export default class UserData {
     let [lat, lon, cc] = [location.coordinates[0], location.coordinates[1], location.cc];
     let units = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'imperial' : 'metric';
     const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${WEATHER_KEY}`;
-    let data = await this.callApi(weatherURL);
-    let unit = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'F' : 'C';
-    this.setProperty('weather', this.parseWeather(data, unit));
+    try {
+      let data = await this.callApi(weatherURL);
+      let unit = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'F' : 'C';
+      this.setProperty('weather', this.parseWeather(data, unit));
+    } catch (err) {
+      this.setProperty('weather', fetchFailed.weather);
+      error.classList.remove('inactive');
+    }
+  }
+
+  /***
+   * fetch new information on weather, news, date, and finance 
+   * show error message if promises fail
+   */
+  async update() {
+    error.classList.add('inactive');
+    try {
+      await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+      this.storeCoords();
+    } catch (err) {
+      console.log('something happened');
+    }
   }
 
 
-  /**
-  * update data
-  */
-  // refresh() {
-  //   return Promise.all([this.saveDate(), this.saveNews(), this.saveFinance(), this.saveWeather()]);
-  // }
-
-  // async refreshPage(callback) {
-  //   await this.refresh().then(() => callback());
-  // }
-
-  async refreshPage() {
-    // await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
-    // await this.saveWeather();
-    await Promise.all([this.saveDate(), this.saveWeather(), this.saveNews(), this.saveFinance()]);
-    // console.log(this);
-  }
-
-
-  /**
-  * save only the user's location property to local local storage
-  * coordinates are the only input needed form user
-  */
-  storeLocation() {
-    let location = this.getProperty('location');
+  /***
+   * save only the user's coordinates to local storage
+   * this will be used to check if the user is new
+   * when page loads, it will check for this and update
+   */
+  storeCoords() {
+    let coords = this.location.coordinates;
+    let location = {
+      lat: coords[0],
+      lon: coords[1]
+    };
     for (let key in location) {
       localStorage.setItem(key, JSON.stringify(location[key]));
     }

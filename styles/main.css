@@ -528,8 +528,12 @@ html {
 }
 
 body {
+  height: 100vh;
   min-height: 100vh;
   width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
   position: absolute;
   color: #FFF;
   font-family: "Open Sans", sans-serif;
@@ -552,6 +556,10 @@ li {
 ul {
   padding: 0;
   margin: 0;
+}
+
+div:hover {
+  cursor: default;
 }
 
 /*********************PRIMARY NAV***********************/

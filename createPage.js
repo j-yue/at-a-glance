@@ -98,7 +98,7 @@ const newsWidget = headline => {
 const header = (headerName, name) => {
   let title = elementStr('h4', 'title', name);
   let btn = elementStr('button', 'close', 'X');
-  let block = `<header class="${headerName}">${title + btn}</header>`;
+  let block = `${btn}<header class="${headerName}">${title}</header>`;
   return block;
 }
 
@@ -157,12 +157,14 @@ const getHoliday = (date, holidays) => {
  * Resulting cells are either empty (padding if month doesn't start on sunday) or has a date and/or holiday
  * @param {num} date 
  * @param {arr} holidays array of objects matching holiday names to their dates of the current month
+ * @param {bool} isToday if current cell contains today's date, also add the 'today' class
  * @return {string} the cell
  */
-const dateCell = (date, holiday) => {
+const dateCell = (date, holiday, isToday) => {
   let _date = elementStr('div', 'date', date);
   let _holiday = elementStr('div', 'holiday', holiday);
-  return elementStr('div', 'cell', _date + _holiday);
+  let className = isToday ? 'cell today' : 'cell';
+  return elementStr('div', `${className}`, _date + _holiday);
 }
 
 /***
@@ -174,7 +176,7 @@ const dateCell = (date, holiday) => {
  * @param {num} end last day of the month
  * @return {string} each cell of the monthly calendar
  */
-const calendarDay = (holidays, start, end) => {
+const calendarDay = (holidays, start, end, today) => {
   let content = '';
   let date = 1;
   //loop starts on sunday
@@ -187,7 +189,7 @@ const calendarDay = (holidays, start, end) => {
       holiday = getHoliday(day, holidays);
       date++;
     }
-    content += dateCell(day, holiday);
+    content += dateCell(day, holiday, today == day);
   }
   return content;
 }
@@ -198,7 +200,7 @@ const calendarDay = (holidays, start, end) => {
  */
 const calendar = data => {
   let week = calendarWeek();
-  let day = calendarDay(data.holidays, data.monthStart, data.monthEnd);
+  let day = calendarDay(data.holidays, data.monthStart, data.monthEnd, data.date);
   let content = week + day;
   document.querySelector('.calendar').innerHTML = content;
   let node = document.querySelector('.calendar-popup', 'Calendar');

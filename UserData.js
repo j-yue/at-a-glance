@@ -261,9 +261,8 @@ export default class UserData {
   async update() {
     error.classList.add('inactive');
     try {
-
-
       await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+      this.storeCoords();
     } catch (err) {
       console.log('something happened');
     }
@@ -281,17 +280,6 @@ export default class UserData {
       lat: coords[0],
       lon: coords[1]
     };
-    for (let key in location) {
-      localStorage.setItem(key, JSON.stringify(location[key]));
-    }
-  }
-
-  /**
-  * save only the user's location property to local local storage
-  * coordinates are the only input needed form user
-  */
-  storeLocation() {
-    let location = this.getProperty('location');
     for (let key in location) {
       localStorage.setItem(key, JSON.stringify(location[key]));
     }

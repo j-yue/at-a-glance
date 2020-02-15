@@ -194,6 +194,210 @@ export const us = {
     }
 }
 
+export const japan = {
+    "location": {
+        "coordinates": [
+            35.689487,
+            139.691706
+        ],
+        "cc": "jp",
+        "city": "Shinjuku"
+    },
+    "news": {
+        "national": [
+            "ホーム下の男性遺体、３日気づかず？…ＪＲ熊谷駅 - 読売新聞",
+            "新型コロナ、アフリカ初の感染者 エジプトで確認（ＡＦＰ＝時事） - Yahoo!ニュース",
+            "Nintendo Switch『デビル メイ クライ 3 スペシャル エディション』の「ブラッディパレス」モードがおすそわけプレイに対応 - IGN JAPAN",
+            "メルセデスF1 「2020年パワーユニットはフォーミュラEの開発手法を適用」 - F1-Gate.com",
+            "エジプトで１人感染、アフリカで初…中国本土の死者１５２３人に - 読売新聞",
+            "森薫が悪魔っ娘メイドを描く新作読み切り「グルン・バエラ」ハルタに - ナタリー",
+            "揺れるクルーズ船対応、国際ルールに穴 WHOは苦言 - 日本経済新聞",
+            "一般社団法人Pythonエンジニア育成推進協会：柱谷 正様のPython 3 エンジニア認定基礎試験合格体験記を公開しました。 - 朝日新聞",
+            "シティに2年間のCL出場禁止処分「驚きはない」 | ゲキサカ - ゲキサカ",
+            "八村が世界選抜に選出／ライジング・スターズ速報 - 日刊スポーツ"
+        ],
+        "business": [
+            "ニュース掲載料支払いか グーグル、欧州報道機関 - 産経ニュース",
+            "米国株はおおむね上昇、企業決算や税制控除巡る報道が支援 - ロイター (Reuters Japan)",
+            "PS5の製造コストはPS4のより20％高い450ドル、「PS VR2」（仮）発売か Bloomberg報道 - ITmedia",
+            "100均のLightningケーブル、充電速度はいまひとつ？（PHILE WEB） - Yahoo!ニュース",
+            "auがサムスンの折りたたみスマホ「Galaxy Z Flip」を独占販売する理由（＠ＤＩＭＥ） - Yahoo!ニュース",
+            "Facebook、米西海岸での社員研修を中止 新型肺炎で - 日本経済新聞",
+            "NTTデータ拠点ビル勤務 協力会社の男性社員が感染(20/02/15) - ANNnewsCH",
+            "ゴーン逃亡「関空ルート」はダミーだった!? 特殊部隊関係者が指摘する“早すぎるリークの謎”（文春オンライン） - Yahoo!ニュース",
+            "SNSで不動産投資勧められ…マルチ商法に60万円支払った学生の末路 - livedoor",
+            "吉野家玉ねぎ4倍「ねぎだく」人気の深いワケ（東洋経済オンライン） - Yahoo!ニュース"
+        ],
+        "world": [
+            "Coronavirus Live Updates: Beijing Sets Stringent New Quarantine Rules",
+            "800,000 Syrians Have Fled in Three Months. This Is What it Looks Like.",
+            "China’s Doctors, Fighting the Coronavirus, Beg for Masks",
+            "He Observed a Protest. Now He Faces a Possible Life Sentence.",
+            "Fire Kills 17 at Unaccredited Orphanage in Haiti",
+            "Boris Johnson Moves Boldly to Consolidate Power",
+            "U.S. and Taliban Agree to Reduce Violence, in First Step To Peace Deal",
+            "Gunman Fires Shots in Bangkok, Rattling Thailand After a Massacre",
+            "Macron Ally Withdraws Paris Mayoral Bid After Sexual Videos Emerge",
+            "They Documented the Coronavirus Crisis in Wuhan. Then They Vanished."
+        ]
+    },
+    "finance": {
+        "indexes": [
+            {
+                "name": "Dow Jones",
+                "price": "$29398.10",
+                "changes": "-42.39",
+                "ticker": ".DJI"
+            },
+            {
+                "name": "Nasdaq",
+                "price": "$9731.18",
+                "changes": "19.21",
+                "ticker": ".IXIC"
+            },
+            {
+                "name": "S&P 500",
+                "price": "$3380.16",
+                "changes": "2.08",
+                "ticker": ".INX"
+            },
+            {
+                "name": "CAC 40",
+                "price": "$6069.35",
+                "changes": "-26.72",
+                "ticker": "%5EFCHI"
+            },
+            {
+                "name": "Russell 1000 Index",
+                "price": "$1870.83",
+                "changes": "2.01",
+                "ticker": "%5ERUI"
+            },
+            {
+                "name": "Russell 2000 Index",
+                "price": "$1687.58",
+                "changes": "-7.29",
+                "ticker": "%5ERUT"
+            },
+            {
+                "name": "NYSE Arca Technology 100 Index",
+                "price": "$3951.11",
+                "changes": "-4.81",
+                "ticker": "%5EPSE"
+            },
+            {
+                "name": "Dow Jones Transportation Average",
+                "price": "$10860.60",
+                "changes": "-121.58",
+                "ticker": "%5EDJT"
+            },
+            {
+                "name": "NASDAQ Computer Index",
+                "price": "$6530.45",
+                "changes": "-3.61",
+                "ticker": "%5EIXCO"
+            },
+            {
+                "name": "S&P 400 Mid Cap Index",
+                "price": "$2092.96",
+                "changes": "-6.50",
+                "ticker": "%5EMID"
+            }
+        ],
+        "crypto": [
+            {
+                "name": "Bitcoin",
+                "price": "$10315.70",
+                "changes": "1.10",
+                "ticker": "BTC"
+            },
+            {
+                "name": "Ethereum",
+                "price": "$285.43",
+                "changes": "6.97",
+                "ticker": "ETH"
+            },
+            {
+                "name": "Ripple",
+                "price": "$0.34",
+                "changes": "2.83",
+                "ticker": "XRP"
+            },
+            {
+                "name": "Bitcoin Cash",
+                "price": "$491.61",
+                "changes": "4.27",
+                "ticker": "BCH"
+            },
+            {
+                "name": "EOS",
+                "price": "$5.37",
+                "changes": "0.90",
+                "ticker": "EOS"
+            },
+            {
+                "name": "Litecoin",
+                "price": "$83.11",
+                "changes": "3.62",
+                "ticker": "LTC"
+            },
+            {
+                "name": "Cardano",
+                "price": "$0.07",
+                "changes": "3.08",
+                "ticker": "ADA"
+            },
+            {
+                "name": "Stellar",
+                "price": "$0.09",
+                "changes": "3.70",
+                "ticker": "XLM"
+            },
+            {
+                "name": "IOTA",
+                "price": "$0.32",
+                "changes": "0.96",
+                "ticker": "MIOTA"
+            },
+            {
+                "name": "TRON",
+                "price": "$0.03",
+                "changes": "9.87",
+                "ticker": "TRX"
+            }
+        ]
+    },
+    "weather": {
+        "type": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d",
+        "current": "15&#176C",
+        "high": "18&#176C",
+        "low": "13&#176C"
+    },
+    "calendar": {
+        "date": 15,
+        "day": "Saturday",
+        "month": "February",
+        "holidays": [
+            {
+                "name": "National Foundation Day",
+                "day": 11
+            },
+            {
+                "name": "Emperor's Birthday",
+                "day": 23
+            },
+            {
+                "name": "Emperor's Birthday observed",
+                "day": 24
+            }
+        ],
+        "monthStart": 6,
+        "monthEnd": 29
+    }
+}
+
 export const fetchFailed = {
     location: {
         coordinates: [
@@ -231,7 +435,7 @@ export const fetchFailed = {
                 ticker: 'Failed to get ticker'
             }
         ]
-        
+
     },
     weather: {
         type: 'Failed to get weather type',
@@ -432,7 +636,7 @@ export const china = {
     "weather": {
         "type": "Clouds",
         "description": "overcast clouds",
-        "icon": "04n",
+        "icon": "50d",
         "current": "11&#176C",
         "high": "11&#176C",
         "low": "11&#176C"

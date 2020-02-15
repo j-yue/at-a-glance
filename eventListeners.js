@@ -43,6 +43,7 @@ export const addEverything = () => {
         if (user === undefined) user = window.user;
         await user.update();
         updatePage(window.prevState, user);
+        console.log(user);
     });
 
     document.querySelector('.refresh-error').addEventListener('click', async () => {
@@ -90,13 +91,13 @@ export const addEverything = () => {
         let user = window.user;
         document.querySelector('.location-error').innerText = '';
         try {
+            document.querySelector('#map > div').remove();
             user.saveCoords(
                 () => {
                     document.querySelector('.location-error').innerText = 'Please enable location services';
                 }
             );
-            document.querySelector('#map > div').remove();
-            updateLocation(user.location);
+            setTimeout(() => updateLocation(user.location), 1000);
         } catch (err) {
             document.querySelector('.location-error').innerText = 'Location services unsupported in browser.';
         }

@@ -36,7 +36,7 @@ function findIcon(condition) {
     case '01d':
       icon = 'CLEAR_DAY';
       break;
-    case '01d':
+    case '01n':
       icon = 'CLEAR_NIGHT';
       break;
     case '02d':

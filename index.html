@@ -4,13 +4,10 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta charset="utf-8">
-  <meta name="description" content="">
+  <meta name="description"
+    content="A web app with four widgets to get a quick summary of the weather, calendar, stock market, and news.">
   <meta name="author" content="jyue.github.io">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="main.css"> -->
-  <!-- <link rel="stylesheet" href="styles/main.css"> -->
-  <!-- <link rel="stylesheet" href="styles/_actions.scss">
-  <link rel="stylesheet" href="styles/_popups.scss"> -->
   <link rel="stylesheet" href="styles/normalize.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/mediaQueries.css">
@@ -18,9 +15,7 @@
   <link rel="icon" type="image/png" href="assets/favicon-32x32.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/css/ol.css"
     type="text/css">
-  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
   <script type="module" src="./generatePage.js"></script>
-  <script src="./skycons.js"></script>
   <title>At-A-Glance</title>
 
 </head>
@@ -47,9 +42,9 @@
     <article class="main-screen">
 
       <header class="main-header">
-        <img class="refresh" src="assets/refresh.svg">
+        <img class="refresh" src="assets/refresh.svg" alt="Refresh button">
         <h1 class="title">At-A-Glance</h1>
-        <img class="menu" src="assets/menu.svg">
+        <img class="menu" src="assets/menu.svg" alt="Menu button">
       </header>
 
       <div class="widgets">
@@ -182,13 +177,17 @@
 
           <p>Designed and coded by |insert github link here|. Made possible with:</p>
           <ul class="credits-list">
-            <li>weather data from <a target="_blank" href="https://openweathermap.org/api">Open Weather Map</a></li>
-            <li>news data gathered from <a target="_blank" href="https://newsapi.org/">News API</a> and <a
-                target="_blank" href="https://developer.nytimes.com/">The New York Times</a></li>
-            <li>weather icons from <a target="_blank" href="https://darkskyapp.github.io/skycons/">Skycons</a></li>
-            <li>reverse geocoding from <a target="_blank" href="https://opencagedata.com/api">OpenCage Geocoder</a></li>
-            <li>map from <a target="_blank" href="https://openlayers.org/">OpenLayers</a></li>
-            <li>financial data from <a target="_blank" href="https://financialmodelingprep.com/developer/docs">Financial
+            <li>weather data from <a target="_blank" rel="noopener" href="https://openweathermap.org/api">Open Weather
+                Map</a></li>
+            <li>news data gathered from <a target="_blank" rel="noopener" href="https://newsapi.org/">News API</a> and
+              <a target="_blank" rel="noopener" href="https://developer.nytimes.com/">The New York Times</a></li>
+            <li>weather icons from <a target="_blank" rel="noopener"
+                href="https://darkskyapp.github.io/skycons/">Skycons</a></li>
+            <li>reverse geocoding from <a target="_blank" rel="noopener" href="https://opencagedata.com/api">OpenCage
+                Geocoder</a></li>
+            <li>map from <a target="_blank" rel="noopener" href="https://openlayers.org/">OpenLayers</a></li>
+            <li>financial data from <a target="_blank" rel="noopener"
+                href="https://financialmodelingprep.com/developer/docs">Financial
                 Modeling Prep</a></li>
           </ul>
 
@@ -230,6 +229,8 @@
 
   </main>
 
+  <script defer src="./skycons.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
 </body>
 
 </html>

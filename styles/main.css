@@ -208,7 +208,7 @@ TABLE OF CONTENTS
 
 .today {
   border-radius: 5rem;
-  color: #20bf6b;
+  color: #263C61;
   background: #fff;
 }
 
@@ -270,7 +270,7 @@ TABLE OF CONTENTS
 }
 
 .finance-nav {
-  color: #eb3b5a;
+  color: #19274B;
 }
 
 .indexes-info, .crypto-info {
@@ -299,7 +299,7 @@ TABLE OF CONTENTS
       align-self: center;
   width: 32%;
   background: white;
-  color: #eb3b5a;
+  color: #19274B;
 }
 
 .active-finance {
@@ -323,7 +323,7 @@ TABLE OF CONTENTS
 }
 
 .news-nav {
-  color: #4b6584;
+  color: #0B1436;
 }
 
 .active-headlines {
@@ -367,7 +367,7 @@ TABLE OF CONTENTS
 
 .active-headlines li:nth-child(2n) {
   background: #fff;
-  color: #4b6584;
+  color: #0B1436;
 }
 
 .active-headlines li:nth-child(2n -1) {
@@ -710,31 +710,31 @@ h4 {
 }
 
 [data-screen="weather"] {
-  background: #2d98da;
+  background: #325176;
 }
 
 [data-screen="calendar"] {
-  background: #20bf6b;
+  background: #263C61;
 }
 
 [data-screen="finance"] {
-  background: #eb3b5a;
+  background: #19274B;
 }
 
 [data-screen="news"] {
-  background: #4b6584;
+  background: #0B1436;
 }
 
 [data-screen="location"] {
-  background: #bdc3c7;
+  background: #716464;
 }
 
 [data-screen="about"] {
-  background: #2d3436;
+  background: #514545;
 }
 
 [data-screen="credits"] {
-  background: #1abc9c;
+  background: #615454;
 }
 
 [data-screen="calendar"] {

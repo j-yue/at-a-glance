@@ -41,8 +41,11 @@ export const addEverything = () => {
     //refresh page
     document.querySelector('.refresh').addEventListener('click', async () => {
         if (user === undefined) user = window.user;
+        let loader = document.querySelector('.loader');
+        loader.classList.remove('inactive');
         await user.update();
         updatePage(window.prevState, user);
+        loader.classList.add('inactive');
         console.log(user);
     });
 

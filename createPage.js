@@ -161,10 +161,10 @@ const getHoliday = (date, holidays) => {
  * @return {string} the cell
  */
 const dateCell = (date, holiday, isToday) => {
-  let _date = elementStr('div', 'date', date);
+  let className = isToday ? 'date today' : 'date';
+  let _date = elementStr('div', className, date);
   let _holiday = elementStr('div', 'holiday', holiday);
-  let className = isToday ? 'cell today' : 'cell';
-  return elementStr('div', `${className}`, _date + _holiday);
+  return elementStr('div', 'cell', _date + _holiday);
 }
 
 /***

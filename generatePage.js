@@ -19,7 +19,7 @@ document.onreadystatechange = async () => {
   let lon = localStorage.getItem('lon');
   
   let user = new UserData(us);
-  // if (lat && lon) await user.update();
+  if (lat && lon) await user.update();
   window.user = user;
 
   if (state === 'loading') {

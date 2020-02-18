@@ -256,7 +256,7 @@ const createMap = (lon, lat) => {
     layers: [
       new ol.layer.Tile({
         source: new ol.source.OSM({
-          url: 'http://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+          url: 'https://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
         })
       })
     ],

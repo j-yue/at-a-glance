@@ -8,6 +8,7 @@ TABLE OF CONTENTS
     a. main header
     b. widgets
     c. update failed
+    d. loading
 */
 
 /*********************IMPORTS***********************/
@@ -246,4 +247,69 @@ $screen-fonts: (
 }
 .update-failed.inactive {
    display: none;
+}
+
+.loader {
+    position: absolute;
+    width: 100%;
+    height: 85vh;
+    top: 15vh;
+    background: $weather-color;
+    @include flex(row, nowrap, center, center);
+}
+
+.loader.inactive {
+    display: none;
+}
+
+.bar {
+    width: .5rem;
+    height: 5rem;
+    background: $primary-color;
+    margin: 0 .25rem;
+    border-radius: .25rem;
+    animation: loading 2s infinite;
+}
+
+.bar:nth-child(2) {
+    animation-delay: .1s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: .2s;
+}
+
+.bar:nth-child(4) {
+    animation-delay: .3s;
+}
+
+.bar:nth-child(5) {
+    animation-delay: .4s;
+}
+
+.bar:nth-child(6) {
+    animation-delay: .5s;
+}
+
+.bar:nth-child(7) {
+    animation-delay: .6s;
+}
+
+.bar:nth-child(8) {
+    animation-delay: .7s;
+}
+
+@keyframes loading {
+    0% {
+        height: 0;
+    }
+    25% {
+        height: 2.5rem;
+    }
+    50% {
+        height: 5rem;
+    }
+    100% {
+        height: 0;
+    }
 }

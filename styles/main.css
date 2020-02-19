@@ -509,7 +509,7 @@ TABLE OF CONTENTS
   list-style-position: inside;
 }
 
-.credits-list a {
+.credits-list a, .credits-content a {
   font-weight: bold;
   color: inherit;
 }

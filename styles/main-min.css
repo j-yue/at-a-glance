@@ -127,6 +127,7 @@ TABLE OF CONTENTS
       -ms-flex-positive: 1.25;
           flex-grow: 1.25;
   padding-bottom: 1rem;
+  max-height: 45vh;
 }
 
 .temp {

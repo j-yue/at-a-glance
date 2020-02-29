@@ -39,9 +39,9 @@ body {
 }
 
 main {
-  position: absolute;
-  top: 0;
-  z-index: 500;
+  //   position: absolute;
+  //   top: 0;
+  //   z-index: 500;
 }
 
 .wrapper {
@@ -105,7 +105,7 @@ h4 {
 
 .primary-nav {
   height: 15vh;
-  position: relative;
+  position: absolute;
   z-index: 1000;
   width: 100%;
   background: #000;

@@ -546,12 +546,6 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-main {
-  position: absolute;
-  top: 0;
-  z-index: 500;
-}
-
 .wrapper {
   overflow: hidden;
   width: 100%;
@@ -638,7 +632,7 @@ h4 {
 
 .primary-nav {
   height: 15vh;
-  position: relative;
+  position: absolute;
   z-index: 1000;
   width: 100%;
   background: #000;

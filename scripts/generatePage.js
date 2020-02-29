@@ -8,32 +8,26 @@
 
  */
 
-import UserData from './UserData.js';
-import { us, china, japan, germany } from './demo.js';
-import { createPage } from './createPage.js';
-import { addEverything } from './eventListeners.js';
+import UserData from "./modules/UserData.js";
+import { us, china, japan, germany } from "./constants/demo.js";
+import { createPage } from "./helpers/createPage.js";
+import { addEverything } from "./helpers/eventListeners.js";
 
 document.onreadystatechange = async () => {
   let state = document.readyState;
-  let lat = localStorage.getItem('lat');
-  let lon = localStorage.getItem('lon');
-  
+  let lat = localStorage.getItem("lat");
+  let lon = localStorage.getItem("lon");
+
   let user = new UserData(us);
   // if (lat && lon) await user.update();
   window.user = user;
 
-  if (state === 'loading') {
-
-  }
-
-  else if (state === 'interactive') {
-
-  }
-
-  else if (state === 'complete') {
+  if (state === "loading") {
+  } else if (state === "interactive") {
+  } else if (state === "complete") {
     let blankState = document.body.innerHTML;
-    window.prevState = blankState; 
+    window.prevState = blankState;
     createPage(user);
     addEverything();
   }
-}
+};

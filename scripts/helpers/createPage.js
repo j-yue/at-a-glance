@@ -12,30 +12,29 @@
  * 4. page
  */
 
-import { elementStr, blockStr, findIcon } from './stringify.js';
-import { addEverything } from './eventListeners.js';
-import UserData from './UserData.js';
-
+import { elementStr, blockStr, findIcon } from "./stringify.js";
+import { addEverything } from "./eventListeners.js";
+import UserData from "../modules/UserData.js";
 
 /***************************************************
  * WIDGETS
  * ********************************************** */
 /***
  * Helper function that creates layout of widget section in main screen
- * @param {string} starter content unique to specific widget 
+ * @param {string} starter content unique to specific widget
  * @param {string} selector classname of element containing the widget
  * @param {arr} keys keys of UserData instance containing desired info
  * @param {obj} data portion of UserData instance containing desired key-value pairs
- * @param {string} tag 
+ * @param {string} tag
  * @return {string} stringified innerHTML of the widget
  */
 const createWidget = (starter, selector, keys, data, tag) => {
-  let content = '';
+  let content = "";
   let block = document.querySelector(`.${selector}`);
   content += blockStr(starter, keys, data, tag);
   block.innerHTML = content;
   return content;
-}
+};
 
 /***
  * Given an icon type, match it to a Skycons icon and place it on a specified part of the page
@@ -45,82 +44,86 @@ const createWidget = (starter, selector, keys, data, tag) => {
  */
 const addWeatherIcon = (selector, data) => {
   let icon = findIcon(data);
-  let weather = new Skycons({ 'color': 'white' });
+  let weather = new Skycons({ color: "white" });
   weather.add(selector, Skycons[icon]);
   return weather;
-}
+};
 
 /***
  * Create weather widget
  * @param {obj} data portion of UserData instance containing weather data
  */
 const weatherWidget = data => {
-  let canvas = elementStr('canvas', 'weather-icon-widget', '');
-  createWidget(canvas, 'weather-widget', ['current', 'type'], data, 'div');
-  addWeatherIcon(document.querySelector('.weather-icon-widget'), data.icon);
-}
+  let canvas = elementStr("canvas", "weather-icon-widget", "");
+  createWidget(canvas, "weather-widget", ["current", "type"], data, "div");
+  addWeatherIcon(document.querySelector(".weather-icon-widget"), data.icon);
+};
 
 /***
  * Create calendar widget
  * @param {obj} data portion of UserData instance containing calendar data
  */
 const calendarWidget = data => {
-  createWidget('', 'calendar-widget', ['day', 'date', 'month'], data, 'div');
-}
+  createWidget("", "calendar-widget", ["day", "date", "month"], data, "div");
+};
 
 /***
  * Create finance widget
  * @param {obj} data portion of UserData instance containing finance data
  */
 const financeWidget = data => {
-  createWidget('', 'finance-widget', ['name', 'price', 'changes'], data, 'div');
-}
+  createWidget("", "finance-widget", ["name", "price", "changes"], data, "div");
+};
 
 /***
  * Create news widget
  * @param {obj} data portion of UserData instance containing news data
  */
 const newsWidget = headline => {
-  document.querySelector('.headline').innerHTML = headline;
-}
+  document.querySelector(".headline").innerHTML = headline;
+};
 
 /***************************************************
  * POPUPS
  * ********************************************** */
 // HEADER
 /***
- * Header to be used in popup and action screens 
+ * Header to be used in popup and action screens
  * Contains name of section and a close button
  * @param {string} headerName classname of resulting header
  * @param {string} name name of the section
  * @return {string} stringified html of the header
  */
 const header = (headerName, name) => {
-  let title = elementStr('h4', 'title', name);
-  let btn = elementStr('button', 'close', 'X');
+  let title = elementStr("h4", "title", name);
+  let btn = elementStr("button", "close", "X");
   let block = `${btn}<header class="${headerName}">${title}</header>`;
   return block;
-}
+};
 
 // WEATHER
 /***
  * Create the weather popup
  * @param {obj} data portion of UserData instance containing weather data
- * @param {string} city 
+ * @param {string} city
  */
 const weather = (data, city) => {
-  let canvas = elementStr('canvas', 'weather-icon-popup', '');
-  let temp = blockStr('', ['low', 'current', 'high'], data, 'div');
+  let canvas = elementStr("canvas", "weather-icon-popup", "");
+  let temp = blockStr("", ["low", "current", "high"], data, "div");
   temp = `<div class="temp">${temp}</div>`;
-  let _city = elementStr('div', 'city', city);
-  let details = blockStr('', ['type', 'description'], data, 'div');
-  let content = canvas + temp + elementStr('div', 'weather-details', _city + details);
-  document.querySelector('.weather').innerHTML = content;
-  let node = document.querySelector('.weather-popup');
-  node.innerHTML = header('header', 'Weather') + node.innerHTML;
-  let weather = addWeatherIcon(document.querySelector('.weather-icon-popup'), data.icon);
+  let _city = elementStr("div", "city", city);
+  let details = blockStr("", ["type", "description"], data, "div");
+  let content =
+    canvas + temp + elementStr("div", "weather-details", _city + details);
+  document.querySelector(".weather").innerHTML = content;
+  let node = document.querySelector(".weather-popup");
+  node.innerHTML = header("header", "Weather") + node.innerHTML;
+  let weather = addWeatherIcon(
+    document.querySelector(".weather-icon-popup"),
+    data.icon
+  );
   weather.play();
-}
+};
 
 // CALENDAR
 /***
@@ -129,18 +132,18 @@ const weather = (data, city) => {
  * @return {string} stringified HTML of cells for each day of the week
  */
 const calendarWeek = () => {
-  let days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  let block = '';
+  let days = ["S", "M", "T", "W", "T", "F", "S"];
+  let block = "";
   for (let day in days) {
-    block += elementStr('div', 'cell', days[day]);
+    block += elementStr("div", "cell", days[day]);
   }
   return block;
-}
+};
 
 /***
  * Helper for calendarDay()
  * Checks if the given date is a holiday
- * @param {num} date 
+ * @param {num} date
  * @param {arr} holidays array of objects matching holiday names to their dates of the current month
  * @return {string} returns name of holiday if date matches holiday and empty string otherwise
  */
@@ -148,28 +151,28 @@ const getHoliday = (date, holidays) => {
   for (let holiday of holidays) {
     if (holiday.day == date) return holiday.name;
   }
-  return '';
-}
+  return "";
+};
 
 /***
  * Helper for calendarDay()
  * Creates cells for calendar
  * Resulting cells are either empty (padding if month doesn't start on sunday) or has a date and/or holiday
- * @param {num} date 
+ * @param {num} date
  * @param {arr} holidays array of objects matching holiday names to their dates of the current month
  * @param {bool} isToday if current cell contains today's date, also add the 'today' class
  * @return {string} the cell
  */
 const dateCell = (date, holiday, isToday) => {
-  let className = isToday ? 'date today' : 'date';
-  let _date = elementStr('div', className, date);
-  let _holiday = elementStr('div', 'holiday', holiday);
-  return elementStr('div', 'cell', _date + _holiday);
-}
+  let className = isToday ? "date today" : "date";
+  let _date = elementStr("div", className, date);
+  let _holiday = elementStr("div", "holiday", holiday);
+  return elementStr("div", "cell", _date + _holiday);
+};
 
 /***
  * Helper for calendar()
- * creates the nunber of cells to populate the calendar 
+ * creates the nunber of cells to populate the calendar
  * accounts for cells to pad calendar if month does not start on a sunday
  * @param {obj} holidays array of objects matching holiday names and their dates
  * @param {num} start 0-6 range indicating which day of the week the month starts on
@@ -177,13 +180,13 @@ const dateCell = (date, holiday, isToday) => {
  * @return {string} each cell of the monthly calendar
  */
 const calendarDay = (holidays, start, end, today) => {
-  let content = '';
+  let content = "";
   let date = 1;
   //loop starts on sunday
   //produce empty cells until start of month hit, then add the date (and holidya if matched)
   for (let i = 0; date <= end; i++) {
-    let day = '';
-    let holiday = '';
+    let day = "";
+    let holiday = "";
     if (i >= start) {
       day = date;
       holiday = getHoliday(day, holidays);
@@ -192,7 +195,7 @@ const calendarDay = (holidays, start, end, today) => {
     content += dateCell(day, holiday, today == day);
   }
   return content;
-}
+};
 
 /***
  * Create calendar popup
@@ -200,46 +203,51 @@ const calendarDay = (holidays, start, end, today) => {
  */
 const calendar = data => {
   let week = calendarWeek();
-  let day = calendarDay(data.holidays, data.monthStart, data.monthEnd, data.date);
+  let day = calendarDay(
+    data.holidays,
+    data.monthStart,
+    data.monthEnd,
+    data.date
+  );
   let content = week + day;
-  document.querySelector('.calendar').innerHTML = content;
-  let node = document.querySelector('.calendar-popup', 'Calendar');
-  node.innerHTML = header('header', data.month) + node.innerHTML;
-}
+  document.querySelector(".calendar").innerHTML = content;
+  let node = document.querySelector(".calendar-popup", "Calendar");
+  node.innerHTML = header("header", data.month) + node.innerHTML;
+};
 
 /***
  * Create news popup
  * @param {obj} data portion of UserData instance containing news data
  */
 const news = data => {
-  let content = '';
+  let content = "";
   for (let type in data) {
-    content += blockStr('', Object.keys(data[type]), data[type], 'li');
+    content += blockStr("", Object.keys(data[type]), data[type], "li");
     document.querySelector(`.${type}-headlines`).innerHTML = content;
-    content = '';
+    content = "";
   }
-  let node = document.querySelector('.news-popup');
-  node.innerHTML = header('header', 'News') + node.innerHTML;
-}
+  let node = document.querySelector(".news-popup");
+  node.innerHTML = header("header", "News") + node.innerHTML;
+};
 
 /***
  * Create finance popup
  * @param {obj} data portion of UserData instance containing finance data
  */
 const finance = data => {
-  let content = '';
+  let content = "";
   for (let type in data) {
     data[type].map(item => {
-      let info = blockStr('', ['ticker', 'price', 'changes'], item, 'div');
-      let _content = elementStr('article', type, info);
+      let info = blockStr("", ["ticker", "price", "changes"], item, "div");
+      let _content = elementStr("article", type, info);
       content += _content;
     });
     document.querySelector(`.${type}-info`).innerHTML = content;
-    content = '';
+    content = "";
   }
-  let node = document.querySelector('.finance-popup');
-  node.innerHTML = header('header', 'Finance') + node.innerHTML;
-}
+  let node = document.querySelector(".finance-popup");
+  node.innerHTML = header("header", "Finance") + node.innerHTML;
+};
 
 /***************************************************
  * ACTIONS
@@ -252,11 +260,11 @@ const finance = data => {
  */
 const createMap = (lon, lat) => {
   let map = new ol.Map({
-    target: 'map',
+    target: "map",
     layers: [
       new ol.layer.Tile({
         source: new ol.source.OSM({
-          url: 'https://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+          url: "https://{a-c}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
         })
       })
     ],
@@ -269,9 +277,7 @@ const createMap = (lon, lat) => {
   });
 
   let marker = new ol.Feature({
-    geometry: new ol.geom.Point(
-      ol.proj.fromLonLat([lon, lat])
-    )
+    geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat]))
   });
 
   let vectorSource = new ol.source.Vector({
@@ -282,7 +288,7 @@ const createMap = (lon, lat) => {
     source: vectorSource
   });
   map.addLayer(markerLayer);
-}
+};
 
 /***
  * Create location action screen
@@ -291,10 +297,10 @@ const createMap = (lon, lat) => {
 const location = data => {
   let [lat, lon] = data.coordinates;
   createMap(lon, lat);
-  document.querySelectorAll('.location-details > div').forEach(detail => {
+  document.querySelectorAll(".location-details > div").forEach(detail => {
     detail.innerText = data[detail.classList[0]];
   });
-}
+};
 
 /***************************************************
  * PAGE
@@ -303,7 +309,7 @@ const location = data => {
  * Create web app based on UserData instance
  * @param {UserData} user UserData instance
  */
-export const createPage = (user) => {
+export const createPage = user => {
   //widgets
   weatherWidget(user.weather);
   calendarWidget(user.calendar);
@@ -318,7 +324,7 @@ export const createPage = (user) => {
 
   //actions
   location(user.location);
-}
+};
 
 /***
  * Called when user refreshes the page
@@ -328,16 +334,17 @@ export const createPage = (user) => {
  */
 export const updatePage = (prevState, user) => {
   //don't update page if update failed
-  let isErrorActive = document.querySelector('.update-failed').classList.length === 1;
+  let isErrorActive =
+    document.querySelector(".update-failed").classList.length === 1;
   if (!isErrorActive) {
-    document.querySelector('body').innerHTML = prevState;
+    document.querySelector("body").innerHTML = prevState;
     createPage(user);
     addEverything();
   }
-}
+};
 
 /***
- * Called when use current location button clicked 
+ * Called when use current location button clicked
  * Update contents of location screen
  * @param {obj} data portion of UserData instance containing calendar data
  */

@@ -1,24 +1,22 @@
-import { WEATHER_KEY, WORLD_URL, INDEX_URL, CRYPTO_URL, GEOCODE_KEY, CALENDAR_KEY } from './urls.js';
-import { fetchFailed } from './demo.js';
+import {
+  WEATHER_KEY,
+  WORLD_URL,
+  INDEX_URL,
+  CRYPTO_URL,
+  GEOCODE_KEY,
+  CALENDAR_KEY
+} from "../constants/urls.js";
+import { SUPPORTED_CC, FAHRENHEIT_COUNTRIES } from "../constants/countries.js";
+import { DAYS, MONTHS } from "../constants/calendar.js";
+import { fetchFailed } from "../constants/demo.js";
 
 //for debugging
-const ALL_PROPERTIES = ['location', 'news', 'finance', 'weather', 'calendar'];
-
-//NEWS api only supports these countries
-const SUPPORTED_CC = ['ae', 'ar', 'at', 'au', 'be', 'bg', 'br', 'ca', 'ch', 'cn', 'co', 'cu', 'cz', 'de', 'eg', 'fr', 'gb', 'gr', 'hk', 'hu', 'id', 'ie', 'il', 'in', 'it', 'jp', 'kr', 'lt', 'lv', 'ma', 'mx', 'my', 'ng', 'nl', 'no', 'nz', 'ph', 'pl', 'pt', 'ro', 'rs', 'ru', 'sa', 'se', 'sg', 'si', 'sk', 'th', 'tr', 'tw', 'ua', 'us', 've', 'za'];
-
-//variables used to turn
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-// country codes for Fahrenheit only countries
-const FAHRENHEIT_COUNTRIES = ['us', 'bs', 'mh', 'ky', 'pw', 'fm', 'lr'];
+const ALL_PROPERTIES = ["location", "news", "finance", "weather", "calendar"];
 
 // error msg node
-const error = document.querySelector('.update-failed');
+const error = document.querySelector(".update-failed");
 
 export default class UserData {
-
   /**
    * Data representation of the web app
    * @constructor
@@ -38,12 +36,12 @@ export default class UserData {
 
   getProperty(property) {
     if (ALL_PROPERTIES.includes(property)) return this[property];
-    else console.log('property does not exist');
+    else console.log("property does not exist");
   }
 
   setProperty(property, data) {
     if (ALL_PROPERTIES.includes(property)) this[property] = data;
-    else console.log('property does not exist');
+    else console.log("property does not exist");
   }
 
   /**
@@ -64,12 +62,14 @@ export default class UserData {
   async reverseGeocode(lat, lon) {
     const geocodeURL = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${GEOCODE_KEY}`;
     try {
-      let location = await this.callApi(geocodeURL).then(res => res.results[0].components);
+      let location = await this.callApi(geocodeURL).then(
+        res => res.results[0].components
+      );
       let [city, cc] = [location.city, location.country_code];
-      this.setProperty('location', { coordinates: [lat, lon], cc, city });
+      this.setProperty("location", { coordinates: [lat, lon], cc, city });
     } catch (err) {
-      this.setProperty('location', fetchFailed.location);
-      error.classList.remove('inactive');
+      this.setProperty("location", fetchFailed.location);
+      error.classList.remove("inactive");
     }
   }
 
@@ -79,10 +79,16 @@ export default class UserData {
    */
   saveCoords(errorFnc) {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(position => {
-        let [lat, lon] = [position.coords.latitude, position.coords.longitude];
-        this.reverseGeocode(lat, lon);
-      }, () => errorFnc());
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          let [lat, lon] = [
+            position.coords.latitude,
+            position.coords.longitude
+          ];
+          this.reverseGeocode(lat, lon);
+        },
+        () => errorFnc()
+      );
     }
   }
 
@@ -92,13 +98,21 @@ export default class UserData {
    */
   async saveDate() {
     let now = new Date();
-    let [year, date, day, month] = [now.getFullYear(), now.getDate(), now.getDay(), now.getMonth()];
+    let [year, date, day, month] = [
+      now.getFullYear(),
+      now.getDate(),
+      now.getDay(),
+      now.getMonth()
+    ];
     let monthStart = new Date(year, month, 1).getDay();
     let monthEnd = new Date(year, month + 1, 0).getDate();
-    let cc = this.getProperty('location').cc;
-    const calendarURL = `https://calendarific.com/api/v2/holidays?&api_key=${CALENDAR_KEY}&country=${cc}&year=${year}&month=${month + 1}&type=national`;
+    let cc = this.getProperty("location").cc;
+    const calendarURL = `https://calendarific.com/api/v2/holidays?&api_key=${CALENDAR_KEY}&country=${cc}&year=${year}&month=${month +
+      1}&type=national`;
     try {
-      let result = await this.callApi(calendarURL).then(res => Object.values(res.response.holidays));
+      let result = await this.callApi(calendarURL).then(res =>
+        Object.values(res.response.holidays)
+      );
       let holidays = [];
       result.map(holiday => {
         let obj = { name: holiday.name, day: holiday.date.datetime.day };
@@ -111,11 +125,11 @@ export default class UserData {
         holidays,
         monthStart,
         monthEnd
-      }
-      this.setProperty('calendar', calendar);
+      };
+      this.setProperty("calendar", calendar);
     } catch (err) {
-      this.setProperty('calendar', fetchFailed.calendar);
-      error.classList.remove('inactive');
+      this.setProperty("calendar", fetchFailed.calendar);
+      error.classList.remove("inactive");
     }
   }
 
@@ -128,23 +142,22 @@ export default class UserData {
    * @return {array} array containing the specified number of headlines
    */
   saveHeadlines(isFromNYT, data, length) {
-    let key = (isFromNYT) ? 'results' : 'articles';
+    let key = isFromNYT ? "results" : "articles";
     let headlines = data[key].slice(0, length);
     let arrHeadlines = [];
     headlines.map(story => arrHeadlines.push(story.title));
     return arrHeadlines;
   }
 
-
   /**
-  * save 10 headlines about:
-  * global news (from the NYT)
-  * national news (country-specific)
-  * business news (country-specific)
-  */
+   * save 10 headlines about:
+   * global news (from the NYT)
+   * national news (country-specific)
+   * business news (country-specific)
+   */
   async saveNews() {
-    let cc = this.getProperty('location').cc;
-    if (!SUPPORTED_CC.includes(cc)) cc = 'us';
+    let cc = this.getProperty("location").cc;
+    if (!SUPPORTED_CC.includes(cc)) cc = "us";
     const urls = {
       national: `https://newsapi.org/v2/top-headlines?country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
       business: `https://newsapi.org/v2/top-headlines?category=business&country=${cc}&apiKey=096c894b904a48a59480e20957af73fa`,
@@ -154,34 +167,38 @@ export default class UserData {
       let promises = Object.keys(urls).map(async key => {
         let temp = {};
         let data = await this.callApi(urls[key]);
-        let headlines = this.saveHeadlines(urls[key].includes('nytimes'), data, 10);
+        let headlines = this.saveHeadlines(
+          urls[key].includes("nytimes"),
+          data,
+          10
+        );
         temp[`${key}`] = headlines;
         return temp;
       });
       let result = await Promise.all(promises);
       let merge = Object.assign(result[0], result[1], result[2]);
-      this.setProperty('news', merge);
+      this.setProperty("news", merge);
     } catch (err) {
-      this.setProperty('news', fetchFailed.news);
-      error.classList.remove('inactive');
+      this.setProperty("news", fetchFailed.news);
+      error.classList.remove("inactive");
     }
   }
 
   /**
-  * helper for saveFinance()
-  * @param {boolean} isIndex
-  * @param {obj} data
-  * @return arr of obj containing the security's name, price, and price changes and prepends '$' to price
-  */
+   * helper for saveFinance()
+   * @param {boolean} isIndex
+   * @param {obj} data
+   * @return arr of obj containing the security's name, price, and price changes and prepends '$' to price
+   */
   saveTicker(isIndex, data) {
     let result = [];
-    let key = (isIndex) ? 'majorIndexesList' : 'cryptocurrenciesList';
-    let name = (isIndex) ? 'indexName' : 'name';
+    let key = isIndex ? "majorIndexesList" : "cryptocurrenciesList";
+    let name = isIndex ? "indexName" : "name";
     let parsedData = data[key].slice(0, 10);
     parsedData.map(index => {
       result.push({
         name: index[`${name}`],
-        price: '$' + index.price.toFixed(2),
+        price: "$" + index.price.toFixed(2),
         changes: index.changes.toFixed(2),
         ticker: index.ticker
       });
@@ -190,31 +207,31 @@ export default class UserData {
   }
 
   /**
-  * save current info on us indexes and the top 10 cryptocurrencies
-  */
+   * save current info on us indexes and the top 10 cryptocurrencies
+   */
   async saveFinance() {
     const urls = {
-      "indexes": INDEX_URL,
-      "crypto": CRYPTO_URL
+      indexes: INDEX_URL,
+      crypto: CRYPTO_URL
     };
     let finance = {
-      "indexes": '',
-      "crypto": ''
+      indexes: "",
+      crypto: ""
     };
     try {
       let promises = Object.keys(urls).map(async key => {
         let response = await this.callApi(urls[`${key}`]);
-        let details = this.saveTicker(key.includes('index'), response);
+        let details = this.saveTicker(key.includes("index"), response);
         return details;
       });
 
       let result = await Promise.all(promises);
       finance.indexes = result[0];
       finance.crypto = result[1];
-      this.setProperty('finance', finance);
+      this.setProperty("finance", finance);
     } catch (err) {
-      this.setProperty('finance', fetchFailed.finance);
-      error.classList.remove('inactive');
+      this.setProperty("finance", fetchFailed.finance);
+      error.classList.remove("inactive");
     }
   }
 
@@ -237,37 +254,45 @@ export default class UserData {
   }
 
   /**
-  * save the user's current weather conditions
-  */
+   * save the user's current weather conditions
+   */
   async saveWeather() {
-    let location = this.getProperty('location');
-    let [lat, lon, cc] = [location.coordinates[0], location.coordinates[1], location.cc];
-    let units = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'imperial' : 'metric';
+    let location = this.getProperty("location");
+    let [lat, lon, cc] = [
+      location.coordinates[0],
+      location.coordinates[1],
+      location.cc
+    ];
+    let units = FAHRENHEIT_COUNTRIES.includes(cc) ? "imperial" : "metric";
     const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${WEATHER_KEY}`;
     try {
       let data = await this.callApi(weatherURL);
-      let unit = (FAHRENHEIT_COUNTRIES.includes(cc)) ? 'F' : 'C';
-      this.setProperty('weather', this.parseWeather(data, unit));
+      let unit = FAHRENHEIT_COUNTRIES.includes(cc) ? "F" : "C";
+      this.setProperty("weather", this.parseWeather(data, unit));
     } catch (err) {
-      this.setProperty('weather', fetchFailed.weather);
-      error.classList.remove('inactive');
+      this.setProperty("weather", fetchFailed.weather);
+      error.classList.remove("inactive");
     }
   }
 
   /***
-   * fetch new information on weather, news, date, and finance 
+   * fetch new information on weather, news, date, and finance
    * show error message if promises fail
    */
   async update() {
-    error.classList.add('inactive');
+    error.classList.add("inactive");
     try {
-      await Promise.all([this.saveWeather(), this.saveNews(), this.saveDate(), this.saveFinance()]);
+      await Promise.all([
+        this.saveWeather(),
+        this.saveNews(),
+        this.saveDate(),
+        this.saveFinance()
+      ]);
       this.storeCoords();
     } catch (err) {
-      console.log('something happened');
+      console.log("something happened");
     }
   }
-
 
   /***
    * save only the user's coordinates to local storage
@@ -284,5 +309,4 @@ export default class UserData {
       localStorage.setItem(key, JSON.stringify(location[key]));
     }
   }
-
 }

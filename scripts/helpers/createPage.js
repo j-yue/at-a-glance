@@ -230,6 +230,12 @@ const news = data => {
   node.innerHTML = header("header", "News") + node.innerHTML;
 };
 
+/**some of the numbers are too big to display on smaller screens */
+const roundPrice = price => {
+  const [dollars] = price.split(".");
+  return dollars.length > 3 ? dollars : price;
+};
+
 /***
  * Create finance popup
  * @param {obj} data portion of UserData instance containing finance data
@@ -238,7 +244,13 @@ const finance = data => {
   let content = "";
   for (let type in data) {
     data[type].map(item => {
-      let info = blockStr("", ["ticker", "price", "changes"], item, "div");
+      const rounded = roundPrice(item.price);
+      let info = blockStr(
+        "",
+        ["ticker", "price", "rounded", "changes"],
+        { ...item, rounded },
+        "div"
+      );
       let _content = elementStr("article", type, info);
       content += _content;
     });

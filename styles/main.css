@@ -31,7 +31,10 @@ TABLE OF CONTENTS
   font-size: 1.5rem;
 }
 
-.weather, .calendar, .finance, .news {
+.weather,
+.calendar,
+.finance,
+.news {
   height: 85vh;
   padding: 1rem;
 }
@@ -133,9 +136,10 @@ TABLE OF CONTENTS
 }
 
 .weather-icon-popup {
-  min-height: 40vh;
-  max-height: 45vh;
-  margin: 0 auto 2rem auto;
+  -webkit-box-flex: 1.25;
+      -ms-flex-positive: 1.25;
+          flex-grow: 1.25;
+  padding-bottom: 1rem;
 }
 
 .temp {
@@ -205,7 +209,7 @@ TABLE OF CONTENTS
 }
 
 .holiday {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 
 .today {
@@ -215,7 +219,8 @@ TABLE OF CONTENTS
 }
 
 /*********************FINANCE + NEWS***********************/
-.finance-nav, .news-nav {
+.finance-nav,
+.news-nav {
   padding: 0.75rem;
   margin: 0;
   display: -webkit-box;
@@ -239,7 +244,8 @@ TABLE OF CONTENTS
   height: 100%;
 }
 
-.finance-nav li, .news-nav li {
+.finance-nav li,
+.news-nav li {
   padding: 0.75rem;
   border-radius: 10px;
   -webkit-transition: 0.5s;
@@ -247,18 +253,20 @@ TABLE OF CONTENTS
   color: #FFF;
 }
 
-.finance-nav li:hover, .news-nav li:hover {
+.finance-nav li:hover,
+.news-nav li:hover {
   cursor: pointer;
   background: #000;
 }
 
-.active-finance-tab, .active-news-tab {
+.active-finance-tab,
+.active-news-tab {
   background: #000 !important;
   color: #000;
 }
 
 .changes::after {
-  content: ' pts';
+  content: " pts";
 }
 
 .finance {
@@ -275,7 +283,8 @@ TABLE OF CONTENTS
   color: #19274B;
 }
 
-.indexes-info, .crypto-info {
+.indexes-info,
+.crypto-info {
   height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -295,7 +304,8 @@ TABLE OF CONTENTS
   padding: 0.75rem;
 }
 
-.indexes-info article, .crypto-info article {
+.indexes-info article,
+.crypto-info article {
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
@@ -310,7 +320,9 @@ TABLE OF CONTENTS
   display: flex;
 }
 
-.national-headlines, .world-headlines, .business-headlines {
+.national-headlines,
+.world-headlines,
+.business-headlines {
   display: none;
 }
 
@@ -353,9 +365,9 @@ TABLE OF CONTENTS
   width: 100%;
   font-size: 1.25rem;
   text-align: center;
-  -webkit-box-flex: .9;
-      -ms-flex-positive: .9;
-          flex-grow: .9;
+  -webkit-box-flex: 0.9;
+      -ms-flex-positive: 0.9;
+          flex-grow: 0.9;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

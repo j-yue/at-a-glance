@@ -28,8 +28,9 @@ TABLE OF CONTENTS
 
 // HEADER
 .header {
-    height: $header-height;
+    height: calc(#{$header-height} - 2rem);
     @include center(row, nowrap);
+    clear: right;
 }
 
 
@@ -90,9 +91,9 @@ TABLE OF CONTENTS
 }
 
 .weather-icon-popup {
-    max-width: 90%;
-    height: 40%;
-    margin: 0 auto 1rem auto;
+    min-height: 40vh;
+    max-height: 45vh;
+    margin: 0 auto 2rem auto;
 }
 
 .temp {
@@ -210,6 +211,10 @@ TABLE OF CONTENTS
 
 .news-nav {
     color: $news-color;
+}
+
+.news .tab {
+    margin-bottom: 1rem;
 }
 
 .active-headlines {

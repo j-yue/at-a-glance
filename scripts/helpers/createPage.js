@@ -50,7 +50,7 @@ const weatherIcon = (condition, getAnimated = false) => {
   path += findIcon(condition) + ".svg";
   const className = !getAnimated ? "weather-icon-widget" : "weather-icon-popup";
   const image = `<image href=${path} height="100%" width="100%" />`;
-  return `<svg class=${className} width="100%" height="70%">${image}</svg>`;
+  return `<svg class=${className} width="100%" height="100%">${image}</svg>`;
 };
 
 /***

@@ -16,7 +16,7 @@ TABLE OF CONTENTS
 // LAYOUT
 
 .popup > article {
-  height: 100vh;
+  height: var(--max-height);
   width: 100%;
   font-size: 1.5rem;
 }
@@ -63,7 +63,7 @@ TABLE OF CONTENTS
 // ACTIVE POPUP
 @keyframes slideUp {
   from {
-    top: 100vh;
+    top: calc(var(--vh) * 100);
   }
   to {
     top: 0;
@@ -75,7 +75,7 @@ TABLE OF CONTENTS
     top: 0;
   }
   to {
-    top: 100vh;
+    top: calc(var(--vh) * 100);
   }
 }
 
@@ -223,7 +223,7 @@ TABLE OF CONTENTS
 
 .active-headlines li {
   font-size: 1rem;
-  flex: 1 1 5%;
+  flex: 1 1 1rem;
   text-align: center;
   padding: 0 2px;
   min-width: 100%;

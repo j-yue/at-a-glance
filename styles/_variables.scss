@@ -10,8 +10,8 @@ $large-text: 2rem;
 $radius: 10px;
 
 //LAYOUT
-$header-height: 12.5vh;
-$content-height: 87.5vh;
+$header-height: calc(var(--vh) * 12.5);
+$content-height: calc(var(--vh) * 87.5);
 $widget-padding: 1rem;
 $popup-padding: 1rem;
 $nav-padding: 0.5rem;

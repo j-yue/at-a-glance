@@ -26,7 +26,7 @@ TABLE OF CONTENTS
 */
 /*********************SHARED STYLES***********************/
 .popup > article {
-  height: 100vh;
+  height: var(--max-height);
   width: 100%;
   font-size: 1.5rem;
 }
@@ -35,12 +35,12 @@ TABLE OF CONTENTS
 .calendar,
 .finance,
 .news {
-  height: 87.5vh;
+  height: calc(var(--vh) * 87.5);
   padding: 1rem;
 }
 
 .header {
-  height: calc(12.5vh - 2rem);
+  height: calc(calc(var(--vh) * 12.5) - 2rem);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -84,7 +84,7 @@ TABLE OF CONTENTS
 
 @-webkit-keyframes slideUp {
   from {
-    top: 100vh;
+    top: calc(var(--vh) * 100);
   }
   to {
     top: 0;
@@ -93,7 +93,7 @@ TABLE OF CONTENTS
 
 @keyframes slideUp {
   from {
-    top: 100vh;
+    top: calc(var(--vh) * 100);
   }
   to {
     top: 0;
@@ -105,7 +105,7 @@ TABLE OF CONTENTS
     top: 0;
   }
   to {
-    top: 100vh;
+    top: calc(var(--vh) * 100);
   }
 }
 
@@ -114,7 +114,7 @@ TABLE OF CONTENTS
     top: 0;
   }
   to {
-    top: 100vh;
+    top: calc(var(--vh) * 100);
   }
 }
 
@@ -360,8 +360,8 @@ TABLE OF CONTENTS
 .active-headlines li {
   font-size: 1rem;
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 5%;
-          flex: 1 1 5%;
+      -ms-flex: 1 1 1rem;
+          flex: 1 1 1rem;
   text-align: center;
   padding: 0 2px;
   min-width: 100%;
@@ -413,7 +413,7 @@ TABLE OF CONTENTS
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 87.5vh;
+  height: calc(var(--vh) * 87.5);
   padding: 1rem;
 }
 
@@ -541,9 +541,13 @@ TABLE OF CONTENTS
           box-sizing: border-box;
 }
 
+:root {
+  --vh: "";
+}
+
 body {
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--max-height);
+  min-height: var(--max-height);
   width: 100%;
   min-width: 320px;
   min-height: 480px;
@@ -558,7 +562,7 @@ body {
 .wrapper {
   overflow: hidden;
   width: 100%;
-  height: 100vh;
+  height: var(--max-height);
 }
 
 /*********************TAGS***********************/
@@ -594,7 +598,7 @@ h4 {
 /*********************PRIMARY NAV***********************/
 @-webkit-keyframes slideInNav {
   from {
-    top: -15vh;
+    top: calc(-1 * calc(var(--vh) * 12.5));
     z-index: 0;
   }
   to {
@@ -604,7 +608,7 @@ h4 {
 }
 @keyframes slideInNav {
   from {
-    top: -15vh;
+    top: calc(-1 * calc(var(--vh) * 12.5));
     z-index: 0;
   }
   to {
@@ -619,7 +623,7 @@ h4 {
     z-index: 1000;
   }
   to {
-    top: -15vh;
+    top: calc(-1 * calc(var(--vh) * 12.5));
     z-index: 0;
   }
 }
@@ -630,7 +634,7 @@ h4 {
     z-index: 1000;
   }
   to {
-    top: -15vh;
+    top: calc(-1 * calc(var(--vh) * 12.5));
     z-index: 0;
   }
 }
@@ -640,7 +644,7 @@ h4 {
 }
 
 .primary-nav {
-  height: 12.5vh;
+  height: calc(var(--vh) * 12.5);
   position: absolute;
   z-index: 1000;
   width: 100%;
@@ -683,7 +687,7 @@ h4 {
 
 /*********************MAIN SCREEN***********************/
 .main-header {
-  height: 12.5vh;
+  height: calc(var(--vh) * 12.5);
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -771,7 +775,7 @@ h4 {
 }
 
 .widgets {
-  height: 87.5vh;
+  height: calc(var(--vh) * 87.5);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -789,7 +793,7 @@ h4 {
 
 .widgets > section {
   width: 50%;
-  height: calc(87.5vh/ 2);
+  height: calc(calc(var(--vh) * 87.5)/ 2);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -871,8 +875,8 @@ h4 {
 .loader {
   position: absolute;
   width: 100%;
-  height: 87.5vh;
-  top: 12.5vh;
+  height: calc(var(--vh) * 87.5);
+  top: calc(var(--vh) * 12.5);
   background: #325176;
   display: -webkit-box;
   display: -ms-flexbox;

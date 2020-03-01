@@ -23,9 +23,14 @@ TABLE OF CONTENTS
   box-sizing: border-box;
 }
 
+// 100vh on mobile doesn't account for browser ui elements
+:root {
+  --vh: "";
+}
+
 body {
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--max-height);
+  min-height: var(--max-height);
   width: 100%;
   min-width: 320px;
   min-height: 480px;
@@ -40,7 +45,7 @@ body {
 .wrapper {
   overflow: hidden;
   width: 100%;
-  height: 100vh;
+  height: var(--max-height);
 }
 
 /*********************TAGS***********************/
@@ -72,7 +77,7 @@ h4 {
 /*********************PRIMARY NAV***********************/
 @keyframes slideInNav {
   from {
-    top: -15vh;
+    top: calc(-1 * #{$header-height});
     z-index: 0;
   }
   to {
@@ -87,7 +92,7 @@ h4 {
     z-index: 1000;
   }
   to {
-    top: -15vh;
+    top: calc(-1 * #{$header-height});
     z-index: 0;
   }
 }

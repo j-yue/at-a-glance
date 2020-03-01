@@ -246,7 +246,7 @@
 
   <script defer src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
   <script>
-    let maxHeight = document.body.clientHeight;
+    let maxHeight = window.innerHeight;
     let root = document.documentElement;
     root.style.setProperty('--vh', (maxHeight * .01) + 'px');
     root.style.setProperty('--max-height', maxHeight + 'px');

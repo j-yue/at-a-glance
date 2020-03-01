@@ -26,53 +26,58 @@ function blockStr(starter, keys, data, tag) {
 }
 
 /**
- * Matches the icon given by the Open Weather Map API to the Skycons weather icons
+ * Matches the icon given by the Open Weather Map API to the weather icons by amCharts
  * @param  {string} condition html element
  * @return {string} the Skycons icon name
  */
 function findIcon(condition) {
-  let icon = 'weather condition';
+  let icon = "";
+
   switch (condition) {
-    case '01d':
-      icon = 'CLEAR_DAY';
+    case "01d":
+      icon = "day";
       break;
-    case '01n':
-      icon = 'CLEAR_NIGHT';
+    case "01n":
+      icon = "night";
       break;
-    case '02d':
-    case '03d':
-      icon = 'PARTLY_CLOUDY_DAY';
+    case "02d":
+      icon = "cloudy-day-1";
       break;
-    case '02n':
-    case '03n':
-      icon = 'PARTLY_CLOUDY_NIGHT';
+    case "02n":
+      icon = "cloudy-night-1";
       break;
-    case '04d':
-    case '04n':
-      icon = 'CLOUDY';
+    case "03d":
+    case "03n":
+    case "04d":
+    case "04n":
+      icon = "cloudy";
       break;
-    case '09d':
-    case '09n':
-    case '10d':
-    case '10n':
-      icon = 'RAIN';
+    case "09d":
+    case "09n":
+      icon = "rainy-7";
       break;
-    case '11d':
-    case '11n':
-      icon = 'SLEET';
+    case "10d":
+      icon = "rainy-1";
       break;
-    case '13d':
-    case '13n':
-      icon = 'SNOW';
+    case "10n":
+      icon = "rainy-4";
       break;
-    case '50d':
-    case '50n':
-      icon = 'FOG';
+    case "11d":
+    case "11n":
+      icon = "thunder";
+      break;
+    case "13d":
+    case "13n":
+      icon = "snowy-6";
+      break;
+    case "50d":
+      icon = "day";
+      break;
+    case "50n":
+      icon = "night";
       break;
   }
   return icon;
 }
 
-
-
-export {elementStr, blockStr, findIcon};
+export { elementStr, blockStr, findIcon };

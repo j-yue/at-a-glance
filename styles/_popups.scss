@@ -90,14 +90,9 @@ TABLE OF CONTENTS
   @include column(nowrap);
 }
 
-.weather-icon-popup {
-  flex-grow: 1.25;
-  padding-bottom: 1rem;
-  max-height: 45vh;
-}
-
 .temp {
   @include center(row, nowrap);
+  flex-grow: 1.25;
 }
 
 .current {
@@ -107,7 +102,7 @@ TABLE OF CONTENTS
 
 .weather-details {
   @include center(column, nowrap);
-  flex-grow: 1;
+  flex-grow: 1.5;
 }
 
 /*********************CALENDAR***********************/
@@ -168,8 +163,8 @@ TABLE OF CONTENTS
   color: $hover-tab;
 }
 
-.changes::after {
-  content: " pts";
+.changes::before {
+  content: "\1D6E5 ";
 }
 
 // FINANCE
@@ -222,17 +217,19 @@ TABLE OF CONTENTS
 }
 
 .active-headlines {
-  height: inherit;
+  height: 100%;
   @include center(column, nowrap);
 }
 
 .active-headlines li {
-  width: 100%;
-  font-size: 1.25rem;
+  font-size: 1rem;
+  flex: 1 1 5%;
   text-align: center;
-  flex-grow: 0.9;
+  padding: 0 2px;
+  min-width: 100%;
   @include center(row, wrap);
 }
+
 .active-headlines li:nth-child(2n) {
   background: $headline-one;
   color: $news-color;

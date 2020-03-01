@@ -8,7 +8,6 @@
     content="A web app with four widgets to get a quick summary of the weather, calendar, stock market, and news.">
   <meta name="author" content="jyue.github.io">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <meta name="apple-mobile-web-app-title" content="At A Glance">
   <meta name="application-name" content="At A Glance">
   <meta name="theme-color" content="#ffffff">
@@ -67,10 +66,8 @@
 
         <div class="widgets">
           <section class="weather-widget" data-screen="weather">
-
-            <canvas class="weather-icon-widget">animated weather icon</canvas>
+            <img class="weather-icon-widget" src="images/weather/static/cloudy-day-1.svg" alt="It's a cloudy day.">
             <div class="temp">temperature</div>
-            <div class="type">weather type</div>
           </section>
 
           <section class="calendar-widget" data-screen="calendar">
@@ -200,7 +197,7 @@
               <li>news data gathered from <a target="_blank" rel="noopener" href="https://newsapi.org/">News API</a> and
                 <a target="_blank" rel="noopener" href="https://developer.nytimes.com/">The New York Times</a></li>
               <li>weather icons from <a target="_blank" rel="noopener"
-                  href="https://darkskyapp.github.io/skycons/">Skycons</a></li>
+                  href="https://www.amcharts.com/free-animated-svg-weather-icons/">amCharts</a></li>
               <li>reverse geocoding from <a target="_blank" rel="noopener" href="https://opencagedata.com/api">OpenCage
                   Geocoder</a></li>
               <li>map from <a target="_blank" rel="noopener" href="https://openlayers.org/">OpenLayers</a></li>

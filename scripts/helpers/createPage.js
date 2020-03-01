@@ -36,17 +36,21 @@ const createWidget = (starter, selector, keys, data, tag) => {
   return content;
 };
 
-/***
- * Given an icon type, match it to a Skycons icon and place it on a specified part of the page
- * @param {string} selector part of the page where to add icon
- * @param {string} data icon type specified by open weather map api
- * @return {Skycons} animated icon resulting from data
+/**
+ * Given a weather condition, match it to the amCharts weather icons
+ * Animated icons have class 'weather-icon-popup' while static icons are 'weahter-icon-widget'
+ * @param {string} condition weather condition given by open weather maps api
+ * @param {bool} getAnimated
+ * @return {string} string of img element created from weather svg
  */
-const addWeatherIcon = (selector, data) => {
-  let icon = findIcon(data);
-  let weather = new Skycons({ color: "white" });
-  weather.add(selector, Skycons[icon]);
-  return weather;
+const weatherIcon = (condition, getAnimated = false) => {
+  const path = !getAnimated
+    ? "../../images/weather/static/"
+    : "../../images/weather/animated/";
+  const className = !getAnimated ? "weather-icon-widget" : "weather-icon-popup";
+  return `<img class=${className} src="${path}${findIcon(
+    condition
+  )}.svg" alt="A weather icon">`;
 };
 
 /***
@@ -54,9 +58,8 @@ const addWeatherIcon = (selector, data) => {
  * @param {obj} data portion of UserData instance containing weather data
  */
 const weatherWidget = data => {
-  let canvas = elementStr("canvas", "weather-icon-widget", "");
-  createWidget(canvas, "weather-widget", ["current", "type"], data, "div");
-  addWeatherIcon(document.querySelector(".weather-icon-widget"), data.icon);
+  let icon = weatherIcon(data.icon);
+  createWidget(icon, "weather-widget", ["current"], data, "div");
 };
 
 /***
@@ -108,21 +111,16 @@ const header = (headerName, name) => {
  * @param {string} city
  */
 const weather = (data, city) => {
-  let canvas = elementStr("canvas", "weather-icon-popup", "");
+  let icon = weatherIcon(data.icon, true);
   let temp = blockStr("", ["low", "current", "high"], data, "div");
   temp = `<div class="temp">${temp}</div>`;
   let _city = elementStr("div", "city", city);
   let details = blockStr("", ["type", "description"], data, "div");
   let content =
-    canvas + temp + elementStr("div", "weather-details", _city + details);
+    icon + temp + elementStr("div", "weather-details", _city + details);
   document.querySelector(".weather").innerHTML = content;
   let node = document.querySelector(".weather-popup");
   node.innerHTML = header("header", "Weather") + node.innerHTML;
-  let weather = addWeatherIcon(
-    document.querySelector(".weather-icon-popup"),
-    data.icon
-  );
-  weather.play();
 };
 
 // CALENDAR

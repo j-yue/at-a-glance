@@ -198,7 +198,7 @@ export default class UserData {
     parsedData.map(index => {
       result.push({
         name: index[`${name}`],
-        price: "$" + index.price.toFixed(2),
+        price: index.price.toFixed(2),
         changes: index.changes.toFixed(2),
         ticker: index.ticker
       });

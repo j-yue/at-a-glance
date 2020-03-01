@@ -1,6 +1,46 @@
+@media (orientation: landscape) {
+  .weather-icon-widget {
+    height: 40vh;
+  }
+  .weather-icon-popup {
+    width: 40vw;
+    margin: 0 auto;
+  }
+  .weather .temp {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (orientation: portrait) {
+  .weather-icon-widget {
+    height: 30vh;
+  }
+  .weather-icon-popup {
+    height: 50vh;
+  }
+  .credits-content p {
+    text-align: center;
+  }
+}
+
 @media screen and (min-width: 0) {
   html {
     font-size: 12px;
+  }
+  .finance-widget .price {
+    font-size: 2.25rem;
+  }
+  .finance-popup .price {
+    display: none;
+  }
+  .about-content {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .about-content {
+    font-size: 1.5rem;
   }
 }
 
@@ -8,9 +48,11 @@
   html {
     font-size: 14px;
   }
-  .weather-icon-widget {
-    height: 50%;
-    width: auto;
+  .finance-popup .rounded {
+    display: none;
+  }
+  .finance-popup .price {
+    display: inherit;
   }
 }
 

@@ -1,44 +1,43 @@
 //FONTS
-$font: 'Open Sans', sans-serif;
-$calendar-font: 'Verdana', sans-serif;
-$finance-font: 'Consolas', 'Overpass Mono', monospace;
-$news-font: 'Tahoma', 'Verdana', sans-serif;
+$font: "Open Sans", sans-serif;
+$calendar-font: "Verdana", sans-serif;
+$finance-font: "Consolas", "Overpass Mono", monospace;
+$news-font: "Tahoma", "Verdana", sans-serif;
 
 //SIZES
 $font-size: 1.5rem;
-$large-text: 3rem;
+$large-text: 2rem;
 $radius: 10px;
 
-
 //LAYOUT
-$header-height: 15vh;
-$content-height: 85vh;
+$header-height: 12.5vh;
+$content-height: 87.5vh;
 $widget-padding: 1rem;
 $popup-padding: 1rem;
-$nav-padding: .5rem;
+$nav-padding: 0.5rem;
 $action-padding: 1rem;
-$nav-padding: .75rem;
+$nav-padding: 0.75rem;
 
 //COLORS
-$primary-color: #FFF;
+$primary-color: #fff;
 $primary-nav-bg: #000;
 $primary-nav-color: #fff;
 $header-color: #000;
-$news-color: #0B1436;
-$finance-color: #19274B;
-$calendar-color: #263C61;
+$news-color: #0b1436;
+$finance-color: #19274b;
+$calendar-color: #263c61;
 $weather-color: #325176;
 $headline-one: #fff;
 $headline-two: #000;
 $location-color: #716464;
 $credits-color: #615454;
-$about-color:#514545;
+$about-color: #514545;
 $active-tab-bg: #000;
 $active-tab-main: #fff;
 
 //TRANSITIONS
-$transition-click: .3s;
-$transition-hover: .5s;
+$transition-click: 0.3s;
+$transition-hover: 0.5s;
 $hover-widget: #888;
 $hover-close-bg: #000;
 $hover-close-main: #fff;

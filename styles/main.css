@@ -549,8 +549,6 @@ body {
   height: var(--max-height);
   min-height: var(--max-height);
   width: 100%;
-  min-width: 320px;
-  min-height: 480px;
   padding: 0;
   margin: 0;
   overflow: hidden;

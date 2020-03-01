@@ -229,6 +229,7 @@ TABLE OF CONTENTS
   min-width: 100%;
   @include center(row, wrap);
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .active-headlines li:nth-child(2n) {

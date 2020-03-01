@@ -366,6 +366,7 @@ TABLE OF CONTENTS
       -ms-flex-align: center;
           align-items: center;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .active-headlines li:nth-child(2n) {

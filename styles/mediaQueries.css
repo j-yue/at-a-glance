@@ -1,22 +1,22 @@
 @media (orientation: landscape) {
   .weather-icon-widget {
-    height: 40vh;
+    height: 50vw;
+    width: 30vw;
   }
   .weather-icon-popup {
-    width: 40vw;
+    height: 65vw;
+    width: 50vw;
     margin: 0 auto;
   }
-  .weather .temp {
-    margin-bottom: 0.5rem;
+  .weather-popup .temp {
+    margin-bottom: 1rem;
   }
 }
 
 @media (orientation: portrait) {
   .weather-icon-widget {
-    height: 30vh;
-  }
-  .weather-icon-popup {
-    height: 50vh;
+    height: 35vh;
+    width: 30vh;
   }
   .credits-content p {
     text-align: center;

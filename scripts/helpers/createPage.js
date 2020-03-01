@@ -44,13 +44,13 @@ const createWidget = (starter, selector, keys, data, tag) => {
  * @return {string} string of img element created from weather svg
  */
 const weatherIcon = (condition, getAnimated = false) => {
-  const path = !getAnimated
+  let path = !getAnimated
     ? "../../images/weather/static/"
     : "../../images/weather/animated/";
+  path += findIcon(condition) + ".svg";
   const className = !getAnimated ? "weather-icon-widget" : "weather-icon-popup";
-  return `<img class=${className} src="${path}${findIcon(
-    condition
-  )}.svg" alt="A weather icon">`;
+  const image = `<image href=${path} height="100%" width="100%" />`;
+  return `<svg class=${className} width="100%" height="70%">${image}</svg>`;
 };
 
 /***

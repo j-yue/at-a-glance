@@ -246,10 +246,19 @@
 
   <script defer src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.1.1/build/ol.js"></script>
   <script>
-    let maxHeight = window.innerHeight;
-    let root = document.documentElement;
-    root.style.setProperty('--vh', (maxHeight * .01) + 'px');
-    root.style.setProperty('--max-height', maxHeight + 'px');
+    if (navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i) {
+
+      let maxHeight = window.innerHeight;
+      let root = document.documentElement;
+      root.style.setProperty('--vh', (maxHeight * .01) + 'px');
+      root.style.setProperty('--max-height', maxHeight + 'px');
+    }
   </script>
 </body>
 

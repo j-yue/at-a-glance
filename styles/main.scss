@@ -25,7 +25,8 @@ TABLE OF CONTENTS
 
 // 100vh on mobile doesn't account for browser ui elements
 :root {
-  --vh: "";
+  --vh: 1vh;
+  --max-height: 100vh;
 }
 
 body {
@@ -46,7 +47,7 @@ body {
   overflow: hidden;
   width: 100%;
   height: var(--max-height);
-  min-height: var(--max-height);
+  // min-height: var(--max-height);
 }
 
 /*********************TAGS***********************/

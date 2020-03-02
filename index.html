@@ -252,12 +252,13 @@
       || navigator.userAgent.match(/iPad/i)
       || navigator.userAgent.match(/iPod/i)
       || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i) {
+      || navigator.userAgent.match(/Windows Phone/i)) {
 
       let maxHeight = window.innerHeight;
       let root = document.documentElement;
       root.style.setProperty('--vh', (maxHeight * .01) + 'px');
       root.style.setProperty('--max-height', maxHeight + 'px');
+      document.querySelector('.wrapper').style.minHeight = 'var(--max-height)';
     }
   </script>
 </body>

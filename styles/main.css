@@ -342,6 +342,7 @@ TABLE OF CONTENTS
 
 .active-headlines {
   height: 100%;
+  max-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -360,11 +361,11 @@ TABLE OF CONTENTS
 .active-headlines li {
   font-size: 1rem;
   -webkit-box-flex: 1;
-      -ms-flex: 1 1 1rem;
-          flex: 1 1 1rem;
+      -ms-flex: 1 1 5%;
+          flex: 1 1 5%;
+  max-height: 9%;
   text-align: center;
-  padding: 0 2px;
-  min-width: 100%;
+  padding: 1px 1.5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -378,8 +379,6 @@ TABLE OF CONTENTS
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  text-overflow: ellipsis;
-  min-width: 0;
 }
 
 .active-headlines li:nth-child(2n) {

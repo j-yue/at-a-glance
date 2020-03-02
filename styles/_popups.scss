@@ -218,18 +218,17 @@ TABLE OF CONTENTS
 
 .active-headlines {
   height: 100%;
+  max-height: 100%;
   @include center(column, nowrap);
 }
 
 .active-headlines li {
   font-size: 1rem;
-  flex: 1 1 1rem;
+  flex: 1 1 5%;
+  max-height: 9%;
   text-align: center;
-  padding: 0 2px;
-  min-width: 100%;
+  padding: 1px 1.5px;
   @include center(row, wrap);
-  text-overflow: ellipsis;
-  min-width: 0;
 }
 
 .active-headlines li:nth-child(2n) {

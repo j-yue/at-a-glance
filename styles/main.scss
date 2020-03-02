@@ -220,6 +220,11 @@ $screen-fonts: (
   cursor: pointer;
 }
 
+.weather-widget {
+  justify-content: center;
+  align-items: center;
+}
+
 .main-screen .date,
 .main-screen .price,
 .headline {

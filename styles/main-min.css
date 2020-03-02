@@ -276,12 +276,12 @@ TABLE OF CONTENTS
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  font-size: 1.15rem;
   text-align: center;
   display: none;
   padding: 0.75rem;
@@ -292,7 +292,8 @@ TABLE OF CONTENTS
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  width: 45%;
+  min-width: 30%;
+  max-width: 32%;
   background: white;
   color: #19274b;
 }

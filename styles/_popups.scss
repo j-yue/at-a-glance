@@ -179,7 +179,8 @@ TABLE OF CONTENTS
 .indexes-info,
 .crypto-info {
   height: 100%;
-  @include center(row, wrap);
+  @include flex(row, wrap, space-around, center);
+  font-size: 1.15rem;
   text-align: center;
   display: none;
   padding: $nav-padding;
@@ -188,7 +189,8 @@ TABLE OF CONTENTS
 .indexes-info article,
 .crypto-info article {
   align-self: center;
-  width: 45%;
+  min-width: 30%;
+  max-width: 32%;
   background: white;
   color: $finance-color;
 }

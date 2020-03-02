@@ -45,8 +45,8 @@ const createWidget = (starter, selector, keys, data, tag) => {
  */
 const weatherIcon = (condition, getAnimated = false) => {
   let path = !getAnimated
-    ? "../../images/weather/static/"
-    : "../../images/weather/animated/";
+    ? "/images/weather/static/"
+    : "/images/weather/animated/";
   path += findIcon(condition) + ".svg";
   const className = !getAnimated ? "weather-icon-widget" : "weather-icon-popup";
   const image = `<image href=${path} height="100%" width="100%" />`;

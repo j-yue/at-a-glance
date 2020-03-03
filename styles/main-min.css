@@ -122,6 +122,10 @@ TABLE OF CONTENTS
           flex-flow: column nowrap;
 }
 
+.weather-icon-popup {
+  margin: auto;
+}
+
 .temp {
   display: -webkit-box;
   display: -ms-flexbox;

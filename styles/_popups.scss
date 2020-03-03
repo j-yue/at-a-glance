@@ -90,6 +90,10 @@ TABLE OF CONTENTS
   @include column(nowrap);
 }
 
+.weather-icon-popup {
+  margin: auto;
+}
+
 .temp {
   @include center(row, nowrap);
   flex-grow: 1.25;

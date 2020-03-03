@@ -24,57 +24,49 @@ function blockStr(starter, keys, data, tag) {
   }
   return content;
 }
-
 /**
- * Matches the icon given by the Open Weather Map API to the weather icons by amCharts
+ * Matches the icon given by the Open Weather Map API to the Skycons weather icons
  * @param  {string} condition html element
  * @return {string} the Skycons icon name
  */
 function findIcon(condition) {
-  let icon = "";
-
+  let icon = "weather condition";
   switch (condition) {
     case "01d":
-      icon = "day";
+      icon = "CLEAR_DAY";
       break;
     case "01n":
-      icon = "night";
+      icon = "CLEAR_NIGHT";
       break;
     case "02d":
-      icon = "cloudy-day-1";
+    case "03d":
+      icon = "PARTLY_CLOUDY_DAY";
       break;
     case "02n":
-      icon = "cloudy-night-1";
-      break;
-    case "03d":
     case "03n":
+      icon = "PARTLY_CLOUDY_NIGHT";
+      break;
     case "04d":
     case "04n":
-      icon = "cloudy";
+      icon = "CLOUDY";
       break;
     case "09d":
     case "09n":
-      icon = "rainy-7";
-      break;
     case "10d":
-      icon = "rainy-1";
-      break;
     case "10n":
-      icon = "rainy-4";
+      icon = "RAIN";
       break;
     case "11d":
     case "11n":
-      icon = "thunder";
+      icon = "SLEET";
       break;
     case "13d":
     case "13n":
-      icon = "snowy-6";
+      icon = "SNOW";
       break;
     case "50d":
-      icon = "day";
-      break;
     case "50n":
-      icon = "night";
+      icon = "FOG";
       break;
   }
   return icon;

@@ -225,6 +225,10 @@ $screen-fonts: (
   align-items: center;
 }
 
+.weather-icon-widget {
+  max-width: 90%;
+}
+
 .main-screen .date,
 .main-screen .price,
 .headline {
